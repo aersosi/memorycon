@@ -1,50 +1,54 @@
+import { useGameState } from "@/contexts/gameContext";
 import { useEffect, useState } from "react";
-import { config } from "@/lib/config";
 
 export type CardProps = {
-    symbol: string;
-    isEasy: boolean;
+    emoji: string;
     onFlip: () => void;
-    onSymbol: (value: string) => void;
-    isMatch: boolean;
+    onEmoji: (value: string) => void;
 };
 
-export default function Card({symbol, isEasy, onFlip, onSymbol, isMatch}: CardProps) {
-    const [isVisible, setIsVisible] = useState(true);
+export default function Card({emoji, onFlip, onEmoji}: CardProps) {
+    const gameState = useGameState();
+
+    const [isEmojiVisible, setIsEmojiVisible] = useState(true);
+    const [isCardHidden, setIsCardHidden] = useState(false);
 
     useEffect(() => {
-        const timeout = isEasy
-            ? config.gameMode.easy.isVisibleTime
-            : config.gameMode.hard.isVisibleTime;
 
-        const flipCards = setTimeout(() => {
-            setIsVisible(false);
-        }, timeout);
-
-        return () => clearTimeout(flipCards);
-    }, []);
-
-    useEffect(() => {
-        if (isMatch) {
-            // todo:
-        } else {
-            // flip cards back
-            setIsVisible(false)
+        // wenn emoji sich in foundMatches befindet, diese Karten ausblenden
+        if (gameState.foundMatches.includes(emoji)) {
+            setIsCardHidden(true);
         }
 
-    }, [isMatch]);
+        if (gameState.previewCards) {
+            const previewCardsTime = gameState.gameMode.isEasy
+                ? gameState.gameMode.gameEasy.previewCardsTime
+                : gameState.gameMode.gameHard.previewCardsTime;
+
+            const previewCards = setTimeout(() => {
+                setIsEmojiVisible(false);
+            }, previewCardsTime * 1000);
+
+            return () => clearTimeout(previewCards);
+        }
+    }, [isEmojiVisible]);
 
     const handleClick = () => {
-        setIsVisible(!isVisible)
+        setIsEmojiVisible(!isEmojiVisible)
         onFlip();
-        onSymbol(symbol);
+        onEmoji(emoji);
     }
 
     return (
-        <div className="relative overflow-hidden perspective" onClick={handleClick}>
-            <CardSide className={`bg-holi-500 ${isVisible ? "[transform:rotateY(180deg)]" : ""}`}/>
-            <CardSide className={`bg-holi-50 ${isVisible ? "" : "[transform:rotateY(180deg)]"}`}>
-                {symbol}
+        <div
+            className={`relative overflow-hidden perspective transition-opacity
+            ${gameState.previewCards ? "pointer-events-none" : ""}
+            ${isCardHidden ? "pointer-events-none opacity-10" : ""}
+        `}
+            onClick={handleClick}>
+            <CardSide className={`bg-holi-500 ${isEmojiVisible ? "[transform:rotateY(180deg)]" : ""}`}/>
+            <CardSide className={`bg-holi-50 ${isEmojiVisible ? "" : "[transform:rotateY(180deg)]"}`}>
+                {emoji}
             </CardSide>
         </div>
     );
