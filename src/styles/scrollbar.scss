@@ -1,0 +1,35 @@
+/*Custom Scrollbar Styles*/
+
+/*Light Theme Colors*/
+body {
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-holi-200);
+  }
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-holi-800);
+  }
+
+  /*Dark Theme Colors*/
+  .dark {
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--color-holi-500);
+    }
+    ::-webkit-scrollbar-track {
+      background-color: var(--color-holi-800);
+    }
+  }
+}
+
+/*Scrollbar Container*/
+/*Width and height are the same for horizontal and vertical scrollbars.*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/*Scrollbar Track Styles*/
+::-webkit-scrollbar,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-track {
+  border-radius: 12px;
+}

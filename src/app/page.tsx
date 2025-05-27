@@ -1,103 +1,82 @@
-import Image from "next/image";
+"use client"
+
+import Card from "@/components/card";
+import { config } from "@/lib/config";
+import { shuffleArray } from "@/lib/utils";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    const isEasy = true;
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    const [cardSymbols, setCardSymbols] = useState([]);
+    const [flippedSymbols, setFlippedSymbols] = useState<string[]>([]);
+
+    const [gameFlips, setGameFlips] = useState(0);
+    const [currentFlipCount, setCurrentFlipCount] = useState(0);
+    const [isMatch, setIsMatch] = useState(false);
+
+    useEffect(() => {
+        setCardSymbols(shuffleArray(config.cardSymbols))
+    }, []);
+
+    const handleGameFlips = () => {
+        setCurrentFlipCount((prev) => {
+            const newCount = prev + 1;
+            if (newCount === 2) {
+                setGameFlips((prevFlips) => prevFlips + 1 / 2);
+                return 0;
+            }
+            return newCount;
+        });
+    };
+
+    const handleFlippedSymbols = (symbol: string) => {
+        setFlippedSymbols((prev) => [...prev, symbol]);
+    };
+
+    useEffect(() => {
+        if (flippedSymbols.length === 2) {
+            const [first, second] = flippedSymbols;
+
+            if (first === second) {
+                console.log("Match! 🎉");
+                setIsMatch(true)
+            } else {
+                console.log("No match 😢");
+            }
+
+            setTimeout(() => {
+                setFlippedSymbols([]);
+            }, 1000);
+        }
+    }, [flippedSymbols]);
+
+
+    return (
+        <div className="h-full flex flex-col gap-4">
+            <header className="flex gap-4 justify-between items-end">
+                <h1 className="text-5xl font-semibold text-hollisticon-50">
+                    memorycon
+                </h1>
+                <p className="text-3xl text-hollisticon-50">Flips: {gameFlips}</p>
+            </header>
+
+            <main className="grow grid grid-cols-6 grid-rows-6 gap-4">
+                {cardSymbols.map((symbol: string, i) =>
+                    <Card
+                        key={i}
+                        symbol={symbol}
+                        isEasy={isEasy}
+                        onFlip={handleGameFlips}
+                        onSymbol={(symbol) => handleFlippedSymbols(symbol)}
+                        isMatch={isMatch}
+                    />
+                )}
+            </main>
+
+            <footer>
+                <p className="text-3xl text-hollisticon-50">Lorem: {flippedSymbols}</p>
+            </footer>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
