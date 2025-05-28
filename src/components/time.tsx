@@ -7,8 +7,8 @@ export default function Time() {
 
     const {playersRound, gameMode, isGameEnd} = gameState;
     const {gameEasy, gameHard} = gameMode;
-    const turnTime = gameEasy ? gameEasy.turnTime : gameHard.turnTime;
-    const previewCardsTime = gameEasy ? gameEasy.previewCardsTime : gameHard.previewCardsTime;
+    const turnTime = gameMode.isEasy ? gameEasy.turnTime : gameHard.turnTime;
+    const previewCardsTime = gameMode.isEasy ? gameEasy.previewCardsTime : gameHard.previewCardsTime;
 
     const handleRoundTimeOver = () => {
         dispatch({type: 'NEXT_ROUND'}) // go to next round
@@ -22,7 +22,7 @@ export default function Time() {
         <>
             {gameState.previewCards ? (
                 <p>
-                    <span>Preview Cards: </span>
+                    <span>Vorschauzeit: </span>
                     <Countdown
                         key="preview"
                         initialTime={previewCardsTime}
@@ -32,7 +32,7 @@ export default function Time() {
                 </p>
             ) : (
                 <p className="flex gap-1">
-                    <span>Time: </span>
+                    <span>Rundenzeit: </span>
                     <span className="w-7 text-center">
                         <Countdown
                             key={`${playersRound.isRoundHuman}`}

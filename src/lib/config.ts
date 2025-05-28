@@ -30,9 +30,9 @@ export type GameState = {
 export const gameStateInitial: GameState = {
     allCards: [
         "🧠", "🧠", "🦆", "🦆",
-        // "💰", "💰", "🌻", "🌻",
-        // "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
-        // "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"
+        "💰", "💰", "🌻", "🌻",
+        "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
+        "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"
     ],
     foundMatches: [],
     isGameEnd: false,
@@ -49,13 +49,13 @@ export const gameStateInitial: GameState = {
         gameEasy: {
             title: "Easy Peasy",
             description: "memorycon easy game",
-            previewCardsTime: 3,
+            previewCardsTime: 10,
             turnTime: 10
         },
         gameHard: {
             title: "Go Hard",
             description: "memorycon hard game",
-            previewCardsTime: 1,
+            previewCardsTime: 5,
             turnTime: 5
         }
     }

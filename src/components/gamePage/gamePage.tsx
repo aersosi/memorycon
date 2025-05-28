@@ -28,6 +28,9 @@ export default function GamePage() {
         setFlippedCardIndices(prev => [...prev, index]);
     };
 
+    // todo: gameHard countdown ist nicht richtig, sondern gleiche zeit wie gameEasy
+    // todo: zu beginn des umdrehens der karten, werden die emojis nochmal geshuffelt
+
     const handleRestartGame = () => {
         setDialogOpen(false);
         setPageHidden(true);
@@ -45,7 +48,7 @@ export default function GamePage() {
     useGameEnd(setDialogOpen);
 
     return (
-        <div className={`${test} transition-opacity duration-250 h-full flex flex-col gap-4 p-12 border`}>
+        <div className={`${test} transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
             <GameHeader/>
             <main className="grow grid grid-cols-6 grid-rows-6 gap-4">
                 {cardEmojis.map((emoji, i) => (
@@ -61,7 +64,7 @@ export default function GamePage() {
             </main>
             <footer className="flex">
                 <Button onClick={handleRestartGame} variant="outline" className="w-1/2 mx-auto">
-                    Stop Game
+                    Zum Anfang
                 </Button>
             </footer>
 

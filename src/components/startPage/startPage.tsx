@@ -1,10 +1,7 @@
-"use client"
-
 import StartHeader from "@/components/startPage/startHeader";
 import StartInput from "@/components/startPage/startInput";
 import { Button } from "@/components/ui/button";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
-import { useEffect } from "react";
 
 export default function StartPage() {
     const dispatch = useGameDispatch();
@@ -12,31 +9,27 @@ export default function StartPage() {
 
     const goEasy = () => {
         dispatch({type: 'SET_GAME_MODE', payload: true})
+        dispatch({type: 'SHOW_GAME', payload: true})
     }
 
     const goHard = () => {
         dispatch({type: 'SET_GAME_MODE', payload: false})
+        dispatch({type: 'SHOW_GAME', payload: true})
     }
 
-    useEffect(() => {
-        const gameModeSet = gameState.gameMode.isEasy
-        console.log(gameModeSet)
-    }, [goEasy, goHard]);
-
     return (
-        <div className="h-full flex flex-col gap-4 p-12">
+        <div className="h-full flex flex-col items-center gap-16 p-12">
             <StartHeader/>
-            {/*<StartInput></StartInput>*/}
+            <div className="flex flex-col gap-4 w-full max-w-lg">
+                <StartInput></StartInput>
 
-            <div className="flex gap-4 border">
-                <Button onClick={goEasy}>
+                <Button onClick={goEasy} className="grow">
                     {gameState.gameMode.gameEasy.title}
                 </Button>
-                <Button onClick={goHard}>
+                <Button onClick={goHard} className="grow">
                     {gameState.gameMode.gameHard.title}
                 </Button>
             </div>
         </div>
-
     );
 }

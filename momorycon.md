@@ -32,22 +32,20 @@
       - [x] `humanPoints = computerPoints` -> Draw
 
 5. Es gibt ein einfaches und schweres Spiel
-   - [ ] Zu Beginn wird der `gameMode` festgestellt
-   - [ ] `if gameMode.isEasy === true`
-       - [ ] Human fängt an `isRoundHuman: true`
-       - [ ] aufgedeckte Karten zu Beginn länger sehen `previewCardsTime` 4 Sekunden
-   - [ ] `if gameMode.isEasy === false`
-       - [ ] Computer fängt an `isRoundHuman: false`
-       - [ ] aufgedeckte Karten zu Beginn kürzer sehen `previewCardsTime` 2 Sekunden
-       - [ ] Wenn der Computer dran ist `isRoundHuman = false` und Karten sind ungleich `matchFound === false`
-           - [ ] Computer klickt nochmal 2 random Karten, die `!isLocked` sind
+   - [x] Zu Beginn wird der `gameMode` festgestellt
+   - [x] `if gameMode.isEasy === true`
+       - [x] aufgedeckte Karten zu Beginn länger sehen `previewCardsTime` 4 Sekunden
+   - [x] `if gameMode.isEasy === false`
+       - [x] aufgedeckte Karten zu Beginn kürzer sehen `previewCardsTime` 2 Sekunden
+       - [x] Wenn der Computer dran ist `isRoundHuman = false` und Karten sind ungleich `matchFound === false`
+           - [x] Computer klickt nochmal 2 random Karten, die `!isLocked` sind
 
 ---
 
 ## gameState store
 
-1. [ ] Jedes Spiel wird mit einem `gameState` initialisiert
-2. [ ] Je nach `gameMode` wird das Spiel mit unterschiedlichen Konditionen/Variablen initialisiert (siehe oben 5.)
+1. [x] Jedes Spiel wird mit einem `gameState` initialisiert
+2. [x] Je nach `gameMode` wird das Spiel mit unterschiedlichen Konditionen/Variablen initialisiert (siehe oben 5.)
    -
 
 ```
@@ -77,5 +75,8 @@ const gameState = {
 }
 ```
 
-
+Ich möchte zwei gleiche indizes eines array von emojis. 
+nicht alle emojis sind verfügbar, mit availableCards bekomme ich ein arrary
+der verfügbaren indizes. aus diesem array sollen die zwei gleichen emojis bestimmt werden,
+damit ich diese in [first, second] geben kann.
 
