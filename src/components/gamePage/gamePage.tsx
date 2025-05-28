@@ -8,8 +8,7 @@ import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
 import { useHandleCardMatch } from "@/hooks/useHandleCardFlip";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
-import { shuffleArray } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function GamePage() {
     return (
