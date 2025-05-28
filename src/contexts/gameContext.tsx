@@ -10,7 +10,7 @@ type GameAction =
     | { type: 'NEXT_ROUND' }
     | { type: 'RESET_GAME' }
     | { type: 'GAME_END' }
-    | { type: 'PREVIEW_CARDS' };
+    | { type: 'END_PREVIEW' };
 
 function gameReducer(state: GameState, action: GameAction): GameState {
     switch (action.type) {
@@ -22,6 +22,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
                     humanPoints: state.playersRound.humanPoints + action.payload,
                 },
             };
+
         case 'INCREMENT_COMPUTER_POINTS':
             return {
                 ...state,
@@ -30,11 +31,13 @@ function gameReducer(state: GameState, action: GameAction): GameState {
                     computerPoints: state.playersRound.computerPoints + action.payload,
                 },
             };
+
         case 'PUSH_FOUND_MATCHES':
             return {
                 ...state,
                 foundMatches: [...state.foundMatches, ...action.payload],
             };
+
         case 'NEXT_ROUND':
             return {
                 ...state,
@@ -43,15 +46,17 @@ function gameReducer(state: GameState, action: GameAction): GameState {
                     isRoundHuman: !state.playersRound.isRoundHuman,
                 },
             };
+
         case 'RESET_GAME':
             return gameStateInitial;
+
         case 'GAME_END':
             return {
                 ...state,
                 isGameEnd: true,
             };
 
-        case 'PREVIEW_CARDS':
+        case 'END_PREVIEW':
             return {
                 ...state,
                 previewCards: false,
@@ -62,13 +67,10 @@ function gameReducer(state: GameState, action: GameAction): GameState {
     }
 }
 
-
-// 4. Contexts erstellen - diese sind bereits richtig typisiert
 const GameStateContext = createContext<GameState | undefined>(undefined);
 const GameDispatchContext = createContext<Dispatch<GameAction> | undefined>(undefined);
 
-// 5. Provider-Komponente
-export const GameProvider = ({children}: { children: ReactNode }) => {
+export const GameProvider = ({ children }: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(gameReducer, gameStateInitial);
 
     return (
@@ -80,7 +82,6 @@ export const GameProvider = ({children}: { children: ReactNode }) => {
     );
 };
 
-// 6. Custom Hooks zur Nutzung des Context
 export const useGameState = () => {
     const context = useContext(GameStateContext);
     if (context === undefined) {

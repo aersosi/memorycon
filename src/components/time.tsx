@@ -1,6 +1,5 @@
 import Countdown from "@/components/countdown";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
-import { useEffect } from "react";
 
 export default function Time() {
     const gameState = useGameState();
@@ -15,27 +14,37 @@ export default function Time() {
         : gameState.gameMode.gameHard.previewCardsTime;
 
     const handleRoundTimeOver = () => {
-        dispatch({type: 'NEXT_ROUND'}) // go next round
+        dispatch({type: 'NEXT_ROUND'}) // go to next round
     }
 
-    useEffect(() => {
-        console.log(gameState.previewCards);
-    }, [gameState.previewCards]);
+    const handlePreviewTimeOver = () => {
+        dispatch({type: 'END_PREVIEW'}) // end card preview
+    }
 
     return (
         <>
-            {gameState.previewCards ?
+            {gameState.previewCards ? (
                 <p>
                     <span>Preview Cards: </span>
-                    <Countdown initialTime={previewCardsTime}/>
-                </p> :
-                <p>
-                    <span>Round: </span>
-                    <Countdown initialTime={turnTime} onTimeOver={handleRoundTimeOver}/>
+                    <Countdown
+                        key="preview"
+                        initialTime={previewCardsTime}
+                        onTimeOver={handlePreviewTimeOver}
+                    />
                 </p>
-            }
-
+            ) : (
+                <p className="flex gap-1">
+                    <span>Time: </span>
+                    <span className="w-4 text-center">
+                        <Countdown
+                            key={`round-${gameState.playersRound.isRoundHuman}`}
+                            initialTime={turnTime}
+                            onTimeOver={handleRoundTimeOver}
+                        />
+                    </span>
+                    <span> Sek.</span>
+                </p>
+            )}
         </>
     );
 }
-

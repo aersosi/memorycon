@@ -7,9 +7,10 @@
 
 2. Es gibt Runden (human und computer wechseln sich ab)
     - [x] Vor der ersten Runde sieht man die aufgedeckten Karten `previewCardsTime`
-    - [ ] Alle Karten sind `isLocked === true`
-    - [ ] `isHumanRound` -> 2 Karten anklicken, die `isLocked === false` sind
-    - [ ] `isComputerRound` -> 2 random Karten anklicken, die `isLocked === false` sind
+    - [x] Alle Karten sind `isLocked === true`
+    - [x] `isHumanRound` -> 2 Karten anklicken, die `isLocked === false` sind
+    - [x] `isComputerRound` -> 2 random Karten anklicken, die `isLocked === false` sind
+      - [x] solange der computer dran ist, sind die karten unklickbar
 
 3. Eine Runde
     - [x] Hat eine bestimmteDauer `turnTime`
@@ -21,13 +22,14 @@
           - [x] `if (humanRound)` -> 1 Punkt in `humanPoints`
           - [x] `if (computerRound)` -> 1 Punkt in `computerPoints`
           
-        - [ ] Karten sind ungleich `matchFound === false`
-          - [ ] Beide Karten `isCardFlipped -> false`
+        - [x] Karten sind ungleich `matchFound === false`
+          - [x] Beide Karten wieder umdrehen `isCardFlipped -> false`
 
 4. Es gibt Gewinner und Verlierer
-    - [ ] `gameEnd === true`
-      - [ ] `humanPoints > computerPoints` -> You Win
-      - [ ] `humanPoints < computerPoints` -> You Loose
+    - [x] `gameEnd === true`
+      - [x] `humanPoints > computerPoints` -> You Win
+      - [x] `humanPoints < computerPoints` -> You Loose
+      - [x] `humanPoints = computerPoints` -> Draw
 
 5. Es gibt ein einfaches und schweres Spiel
    - [ ] Zu Beginn wird der `gameMode` festgestellt
@@ -52,7 +54,6 @@
 const gameState = {
     allCards: [xxx],
     foundMatches: [],
-    isGameEnd: false,
     playersRound: {
         isRoundHuman: true,
         humanPoints: 0,
