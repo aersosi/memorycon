@@ -22,7 +22,7 @@ export default function Countdown({initialTime = 60, onTimeOver, stopOn = true}:
         }, 1000);
 
         return () => clearInterval(timer);
-    }, [timeLeft]);
+    }, [timeLeft, onTimeOver, stopOn]);
 
     return <>{timeLeft}</>;
 }
