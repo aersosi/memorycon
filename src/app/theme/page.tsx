@@ -13,7 +13,6 @@ export default function Theme() {
                 <SquareArrowOutUpRight size={48}/>
             </div>
 
-
             <div className="py-16">
                 <hr/>
             </div>

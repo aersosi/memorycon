@@ -4,9 +4,12 @@ import { GameState, gameStateInitial } from "@/lib/config";
 import { createContext, useContext, useReducer, ReactNode, Dispatch } from 'react';
 
 type GameAction =
+    | { type: 'SET_HUMAN_NAME'; payload: string }
     | { type: 'INCREMENT_HUMAN_POINTS'; payload: number }
     | { type: 'INCREMENT_COMPUTER_POINTS'; payload: number }
     | { type: 'PUSH_FOUND_MATCHES'; payload: [string, string] }
+    | { type: 'SHOW_GAME'; payload: boolean }
+    | { type: 'SET_GAME_MODE'; payload: boolean }
     | { type: 'NEXT_ROUND' }
     | { type: 'RESET_GAME' }
     | { type: 'GAME_END' }
@@ -14,6 +17,14 @@ type GameAction =
 
 function gameReducer(state: GameState, action: GameAction): GameState {
     switch (action.type) {
+        case 'SET_HUMAN_NAME':
+            return {
+                ...state,
+                playersRound: {
+                    ...state.playersRound,
+                    humanName: action.payload,
+                },
+            };
         case 'INCREMENT_HUMAN_POINTS':
             return {
                 ...state,
@@ -36,6 +47,24 @@ function gameReducer(state: GameState, action: GameAction): GameState {
             return {
                 ...state,
                 foundMatches: [...state.foundMatches, ...action.payload],
+            };
+
+        case 'SHOW_GAME':
+            return {
+                ...state,
+                gameMode: {
+                    ...state.gameMode,
+                    showGame: action.payload,
+                },
+            };
+
+        case 'SET_GAME_MODE':
+            return {
+                ...state,
+                gameMode: {
+                    ...state.gameMode,
+                    isEasy: action.payload,
+                },
             };
 
         case 'NEXT_ROUND':
