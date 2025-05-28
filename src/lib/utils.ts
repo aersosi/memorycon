@@ -22,6 +22,21 @@ export const shuffleArray = <T>(array: T[]): T[] => {
     return array;
 }
 
+export function findDuplicates(cardEmojis: string[], availableCards: number[]): [number, number] | null {
+    const seen: Record<string, number> = {};
+
+    for (const index of availableCards) {
+        const emoji = cardEmojis[index];
+        if (emoji in seen) {
+            return [seen[emoji], index];
+        } else {
+            seen[emoji] = index;
+        }
+    }
+
+    return null;
+}
+
 export const isRoundHumanString = (stringHuman: string, stringComputer: string) => {
     const gameState = useGameState();
     return gameState.playersRound.isRoundHuman ? stringHuman : stringComputer
