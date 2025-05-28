@@ -31,5 +31,5 @@ export function useHandleCardMatch(
         }, 1000);
 
         return () => clearTimeout(timeout);
-    }, [flippedCardIndices, cardEmojis, dispatch, playersRound.isRoundHuman, resetFlipped]);
+    }, [flippedCardIndices]);
 }

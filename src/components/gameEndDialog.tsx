@@ -26,7 +26,7 @@ export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
     const bodyCopy = useWinnerString("😍", "😭", "😑");
 
     return (
-        <Dialog open={isOpen} onOpenChange={(open) => {if (!open) onButton?.()}}>
+        <Dialog open={isOpen} onOpenChange={onButton}>
             <DialogContent hideClose>
                 <DialogHeader>
                     <DialogTitle className={cn(`text-3xl text-center ${textColorWinner}`)}>{title}</DialogTitle>
