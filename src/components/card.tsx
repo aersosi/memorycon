@@ -1,4 +1,6 @@
+import { useRoundStyles } from "@/hooks/useStyles";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
 export type CardProps = {
@@ -12,6 +14,7 @@ export type CardProps = {
 export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
+    const { bgColorRound } = useRoundStyles();
 
     // Handle preview mode timing
     useEffect(() => {
@@ -37,20 +40,22 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
 
     return (
         <div
-            className={`relative overflow-hidden perspective transition-opacity cursor-pointer
+            className={cn(`relative overflow-hidden perspective cursor-pointer
+                        transition-opacity duration-250 delay-250 
                 ${isPreview && "pointer-events-none"}
                 ${isFound && "pointer-events-none opacity-10"}
+                ${isFound && "pointer-events-none"}
                 ${!gameState.playersRound.isRoundHuman && "pointer-events-none"}
-            `}
+            `)}
             onClick={handleClick}
         >
             <CardSide
-                className={` 
+                className={cn(` 
                 ${isEmojiVisible && "[transform:rotateY(180deg)]"}
-                ${gameState.playersRound.isRoundHuman ? "bg-holi-500" : "bg-amber-500"}
-                `}
+                ${bgColorRound}
+                `)}
             />
-            <CardSide className={`bg-holi-50 ${!isEmojiVisible && "[transform:rotateY(180deg)]"}`}>
+            <CardSide className={cn(`bg-white ${!isEmojiVisible && "[transform:rotateY(180deg)]"}`)}>
                 {emoji}
             </CardSide>
         </div>
@@ -71,3 +76,4 @@ export function CardSide({className = "", children}: CardSideProps) {
         </div>
     );
 }
+

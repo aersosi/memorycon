@@ -1,3 +1,4 @@
+import { useWinnerStyles } from "@/hooks/useStyles";
 import { Button } from "@/components/ui/button";
 import {
     Dialog,
@@ -8,6 +9,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { useGameState } from "@/contexts/gameContext";
+import { cn, isWinnerString } from "@/lib/utils";
 
 type GameEndDialogProps = {
     isOpen?: boolean,
@@ -16,37 +18,26 @@ type GameEndDialogProps = {
 
 export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
     const gameState = useGameState();
+    const { textColorWinner } = useWinnerStyles();
 
-    const winnerText = (humanText: string, computerText: string, drawText: string) => {
-        const {humanPoints, computerPoints} = gameState.playersRound;
-        if (humanPoints > computerPoints) return humanText;     // human wins
-        if (humanPoints < computerPoints) return computerText;  // computer wins
-        return drawText;                                        // draw
-    };
-
-    const title = winnerText(
-        "Du hast gewonnen!",
-        "Du hast verloren!",
-        "Gleichstand!",
-    )
-
-    const bodyCopy = winnerText(
-        "😍",
-        "😭",
-        "😑",
-    )
+    const {humanPoints, computerPoints} = gameState.playersRound;
+    const title = isWinnerString("Du hast gewonnen!", "Du hast verloren!", "Gleichstand!");
+    const bodyCopy = isWinnerString("😍", "😭", "😑");
 
     return (
         <Dialog open={isOpen} onOpenChange={onButton}>
             <DialogContent hideClose>
                 <DialogHeader>
-                    <DialogTitle className="text-3xl text-center">{title}</DialogTitle>
+                    <DialogTitle className={cn(`text-3xl text-center ${textColorWinner}`)}>{title}</DialogTitle>
                 </DialogHeader>
 
+                <div className="flex justify-center gap-4 text-xl py-2">
+                    <p>Deine Punkte: {humanPoints}</p>
+                    <p>Computer Punkte: {computerPoints}</p>
+                </div>
                 <p className="text-7xl py-6 text-center">
                     {bodyCopy}
                 </p>
-
                 <DialogFooter>
                     <DialogClose asChild className="w-1/2 mx-auto">
                         <Button type="button">

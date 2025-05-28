@@ -5,13 +5,10 @@ export default function Time() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
 
-    const turnTime = gameState.gameMode.isEasy
-        ? gameState.gameMode.gameEasy.turnTime
-        : gameState.gameMode.gameHard.turnTime;
-
-    const previewCardsTime = gameState.gameMode.isEasy
-        ? gameState.gameMode.gameEasy.previewCardsTime
-        : gameState.gameMode.gameHard.previewCardsTime;
+    const {playersRound, gameMode, isGameEnd} = gameState;
+    const {gameEasy, gameHard} = gameMode;
+    const turnTime = gameEasy ? gameEasy.turnTime : gameHard.turnTime;
+    const previewCardsTime = gameEasy ? gameEasy.previewCardsTime : gameHard.previewCardsTime;
 
     const handleRoundTimeOver = () => {
         dispatch({type: 'NEXT_ROUND'}) // go to next round
@@ -30,6 +27,7 @@ export default function Time() {
                         key="preview"
                         initialTime={previewCardsTime}
                         onTimeOver={handlePreviewTimeOver}
+                        stopOn={false}
                     />
                 </p>
             ) : (
@@ -37,9 +35,10 @@ export default function Time() {
                     <span>Time: </span>
                     <span className="w-4 text-center">
                         <Countdown
-                            key={`round-${gameState.playersRound.isRoundHuman}`}
+                            key={`${playersRound.isRoundHuman}`}
                             initialTime={turnTime}
                             onTimeOver={handleRoundTimeOver}
+                            stopOn={isGameEnd} // stop on GameEnd
                         />
                     </span>
                     <span> Sek.</span>
