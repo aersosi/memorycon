@@ -33,7 +33,7 @@ export default function Time() {
             ) : (
                 <p className="flex gap-1">
                     <span>Time: </span>
-                    <span className="w-4 text-center">
+                    <span className="w-7 text-center">
                         <Countdown
                             key={`${playersRound.isRoundHuman}`}
                             initialTime={turnTime}

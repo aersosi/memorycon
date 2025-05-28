@@ -3,29 +3,22 @@
 import Card from "@/components/card";
 import GameEndDialog from "@/components/gameEndDialog";
 import GameHeader from "@/components/gamePage/gameHeader";
-import { GameProvider, useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
 import { useHandleCardMatch } from "@/hooks/useHandleCardFlip";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
-import { shuffleArray } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { Button } from "../ui/button";
 
 export default function GamePage() {
-    return (
-        <GameProvider>
-            <GameContent />
-        </GameProvider>
-    );
-}
-
-function GameContent() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
     const [cardEmojis, setCardEmojis] = useState<string[]>([]);
     const [flippedCardIndices, setFlippedCardIndices] = useState<number[]>([]);
     const [shuffleTrigger, setShuffleTrigger] = useState(0);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const [pageHidden, setPageHidden] = useState(false);
 
     const handleCardFlip = (index: number) => {
         if (gameState.previewCards || flippedCardIndices.includes(index)) return;
@@ -37,11 +30,14 @@ function GameContent() {
 
     const handleRestartGame = () => {
         setDialogOpen(false);
+        setPageHidden(true);
         setTimeout(() => {
-            dispatch({ type: "RESET_GAME" });
+            dispatch({type: "RESET_GAME"});
             setShuffleTrigger(prev => prev + 1);
         }, 1000);
     };
+
+    const test = pageHidden && "opacity-0"
 
     useInitializeGame(shuffleTrigger, setCardEmojis);
     useHandleCardMatch(flippedCardIndices, cardEmojis, () => setFlippedCardIndices([]));
@@ -49,8 +45,8 @@ function GameContent() {
     useGameEnd(setDialogOpen);
 
     return (
-        <div className="h-full flex flex-col gap-4 p-12">
-            <GameHeader />
+        <div className={`${test} transition-opacity duration-250 h-full flex flex-col gap-4 p-12 border`}>
+            <GameHeader/>
             <main className="grow grid grid-cols-6 grid-rows-6 gap-4">
                 {cardEmojis.map((emoji, i) => (
                     <Card
@@ -63,12 +59,13 @@ function GameContent() {
                     />
                 ))}
             </main>
-            <footer>
-                <p className="text-3xl">
-                    Flipped: {flippedCardIndices.map(i => cardEmojis[i]).join(" ")}
-                </p>
+            <footer className="flex">
+                <Button onClick={handleRestartGame} variant="outline" className="w-1/2 mx-auto">
+                    Stop Game
+                </Button>
             </footer>
-            <GameEndDialog isOpen={dialogOpen} onButton={handleRestartGame} />
+
+            <GameEndDialog isOpen={dialogOpen} onButton={handleRestartGame}/>
         </div>
     );
 }

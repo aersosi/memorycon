@@ -14,7 +14,7 @@ export default function GameHeader() {
     const gameModeText = gameMode.isEasy ? "Easy Peasy" : "Go Hard";
 
     return (
-        <header className="flex flex-col gap-4 justify-between">
+        <header className="flex flex-col gap-4 justify-between text-xl">
             <div className="flex gap-8 justify-between items-end">
                 <div className="flex gap-4 items-end">
                     <h1 className={cn(`text-4xl font-semibold ${textColorRound}`)}>memorycon</h1>

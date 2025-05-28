@@ -5,10 +5,12 @@ export type GameState = {
     previewCards: boolean;
     playersRound: {
         isRoundHuman: boolean;
+        humanName: string;
         humanPoints: number;
         computerPoints: number;
     };
     gameMode: {
+        showGame: boolean;
         isEasy: boolean;
         gameEasy: {
             title: string;
@@ -37,10 +39,12 @@ export const gameStateInitial: GameState = {
     previewCards: true,
     playersRound: {
         isRoundHuman: true,
+        humanName: "Human",
         humanPoints: 0,
         computerPoints: 0,
     },
     gameMode: {
+        showGame: false,
         isEasy: true,
         gameEasy: {
             title: "Easy Peasy",
