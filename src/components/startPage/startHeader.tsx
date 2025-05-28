@@ -1,5 +1,3 @@
-import { cn } from "@/lib/utils";
-
 export default function StartHeader() {
     return (
         <header className="flex flex-col gap-16 justify-between">

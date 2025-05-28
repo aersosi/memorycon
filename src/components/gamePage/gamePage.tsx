@@ -28,9 +28,6 @@ export default function GamePage() {
         setFlippedCardIndices(prev => [...prev, index]);
     };
 
-    // todo: gameHard countdown ist nicht richtig, sondern gleiche zeit wie gameEasy
-    // todo: zu beginn des umdrehens der karten, werden die emojis nochmal geshuffelt
-
     const handleRestartGame = () => {
         setDialogOpen(false);
         setPageHidden(true);
