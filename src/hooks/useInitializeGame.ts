@@ -7,7 +7,7 @@ export function useInitializeGame(trigger: number, setEmojis: (emojis: string[])
     const dispatch = useGameDispatch();
 
     useEffect(() => {
-        Math.random() < 0.5 && dispatch({ type: "NEXT_ROUND" });
+        if (Math.random() < 0.5) dispatch({type: "NEXT_ROUND"});
         setEmojis(shuffleArray([...allCards]));
-    }, [trigger]);
+    }, [trigger, allCards, dispatch, setEmojis]);
 }

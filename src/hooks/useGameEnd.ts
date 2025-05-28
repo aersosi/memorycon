@@ -10,5 +10,5 @@ export function useGameEnd(setOpen: (v: boolean) => void) {
             dispatch({ type: "GAME_END" });
             setOpen(true);
         }
-    }, [foundMatches]);
+    }, [foundMatches, allCards.length, dispatch, setOpen]);
 }

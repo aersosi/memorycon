@@ -1,15 +1,15 @@
-import { isRoundHumanString, isWinnerString } from "@/lib/utils";
+import { useRoundHumanString, useWinnerString } from "@/hooks/useStrings";
 
 export const useRoundStyles = () => {
     return {
-        textColorRound: isRoundHumanString("text-holi-500", "text-amber-500"),
-        bgColorRound: isRoundHumanString("bg-holi-500", "bg-amber-500"),
+        textColorRound: useRoundHumanString("text-holi-500", "text-amber-500"),
+        bgColorRound: useRoundHumanString("bg-holi-500", "bg-amber-500"),
     };
 };
 
 export const useWinnerStyles = () => {
     return {
-        textColorWinner: isWinnerString("text-holi-500", "text-amber-500", ""),
-        bgColorRoundWinner: isWinnerString("bg-holi-500", "bg-amber-500", ""),
+        textColorWinner: useWinnerString("text-holi-500", "text-amber-500", ""),
+        bgColorRoundWinner: useWinnerString("bg-holi-500", "bg-amber-500", ""),
     };
 };

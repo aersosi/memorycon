@@ -30,7 +30,7 @@ export function useComputerTurn(
         }, 1000);
 
         return () => clearTimeout(timeout);
-    }, [playersRound.isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameMode.isEasy, previewCards]);
+    }, [playersRound.isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameMode.isEasy, previewCards, handleCardFlip]);
 }
 
 
