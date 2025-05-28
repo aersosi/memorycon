@@ -9,5 +9,5 @@ export function useInitializeGame(trigger: number, setEmojis: (emojis: string[])
     useEffect(() => {
         if (Math.random() < 0.5) dispatch({type: "NEXT_ROUND"});
         setEmojis(shuffleArray([...allCards]));
-    }, [trigger]);
+    }, [trigger, allCards, dispatch, setEmojis]);
 }

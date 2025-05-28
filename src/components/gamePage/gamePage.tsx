@@ -6,9 +6,9 @@ import GameHeader from "@/components/gamePage/gameHeader";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
-import { useHandleCardMatch } from "@/hooks/useHandleCardFlip";
+import { useHandleCardMatch } from "@/hooks/useHandleCardMatch";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Button } from "../ui/button";
 
 export default function GamePage() {
@@ -20,13 +20,20 @@ export default function GamePage() {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [pageHidden, setPageHidden] = useState(false);
 
-    const handleCardFlip = (index: number) => {
-        if (gameState.previewCards || flippedCardIndices.includes(index)) return;
-        if (gameState.foundMatches.includes(cardEmojis[index])) return;
-        if (flippedCardIndices.length >= 2) return;
+    const handleCardFlip = useCallback((index: number) => {
+        if (gameState.previewCards ||
+            flippedCardIndices.includes(index) ||
+            gameState.foundMatches.includes(cardEmojis[index]) ||
+            flippedCardIndices.length >= 2
+        ) return;
 
         setFlippedCardIndices(prev => [...prev, index]);
-    };
+    }, [
+        gameState.previewCards,
+        gameState.foundMatches,
+        flippedCardIndices,
+        cardEmojis
+    ]);
 
     const handleRestartGame = () => {
         setDialogOpen(false);
@@ -37,15 +44,18 @@ export default function GamePage() {
         }, 1000);
     };
 
-    const test = pageHidden && "opacity-0"
+    const hidePage = pageHidden && "opacity-0"
+    const resetFlipped = useCallback(() => {
+        setFlippedCardIndices([]);
+    }, []);
 
     useInitializeGame(shuffleTrigger, setCardEmojis);
-    useHandleCardMatch(flippedCardIndices, cardEmojis, () => setFlippedCardIndices([]));
+    useHandleCardMatch(flippedCardIndices, cardEmojis, resetFlipped);
     useComputerTurn(handleCardFlip, cardEmojis, flippedCardIndices);
     useGameEnd(setDialogOpen);
 
     return (
-        <div className={`${test} transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
+        <div className={`${hidePage} transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
             <GameHeader/>
             <main className="grow grid grid-cols-6 grid-rows-6 gap-4">
                 {cardEmojis.map((emoji, i) => (

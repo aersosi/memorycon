@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { useEffect } from "react";
 
 export function useHandleCardMatch(
     flippedCardIndices: number[],
@@ -7,7 +7,7 @@ export function useHandleCardMatch(
     resetFlipped: () => void
 ) {
     const dispatch = useGameDispatch();
-    const { playersRound } = useGameState();
+    const { playersRound } = useGameState(); // Nur benötigte Werte extrahieren
 
     useEffect(() => {
         if (flippedCardIndices.length !== 2) return;
@@ -31,5 +31,11 @@ export function useHandleCardMatch(
         }, 1000);
 
         return () => clearTimeout(timeout);
-    }, [flippedCardIndices]);
+    }, [
+        flippedCardIndices,
+        cardEmojis,
+        dispatch,
+        playersRound.isRoundHuman,
+        resetFlipped
+    ]);
 }
