@@ -1,5 +1,6 @@
 import { useRoundStyles } from "@/hooks/useStyles";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { getGameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
@@ -14,14 +15,14 @@ export type CardProps = {
 export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
+    const config = getGameConfig(gameState.gameMode.isEasy);
+
     const { bgColorRound } = useRoundStyles();
 
     // Handle preview mode timing
     useEffect(() => {
         if (isPreview) {
-            const previewTime = gameState.gameMode.isEasy
-                ? gameState.gameMode.gameEasy.previewCardsTime
-                : gameState.gameMode.gameHard.previewCardsTime;
+            const previewTime = config.previewTime;
 
             const timer = setTimeout(() => {
                 dispatch({type: 'END_PREVIEW'});

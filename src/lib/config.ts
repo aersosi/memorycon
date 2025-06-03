@@ -10,23 +10,18 @@ export type GameState = {
         humanPoints: number;
         computerPoints: number;
     };
+    showGame: boolean;
     gameMode: {
-        showGame: boolean;
         isEasy: boolean;
-        gameEasy: {
-            title: string;
-            description: string;
-            previewCardsTime: number;
-            turnTime: number;
-        };
-        gameHard: {
-            title: string;
-            description: string;
-            previewCardsTime: number;
-            turnTime: number;
-        };
     };
 };
+
+export const getGameConfig = (isEasy: boolean) => ({
+    previewTime: isEasy ? 10 : 2,
+    turnTime: isEasy ? 10 : 5,
+    title: isEasy ? "Easy Peasy" : "Go Hard",
+    description: isEasy ? "memorycon easy game" : "memorycon hard game",
+});
 
 export const gameStateInitial: GameState = {
     allCards: [
@@ -46,20 +41,8 @@ export const gameStateInitial: GameState = {
         humanPoints: 0,
         computerPoints: 0,
     },
+    showGame: false,
     gameMode: {
-        showGame: false,
         isEasy: true,
-        gameEasy: {
-            title: "Easy Peasy",
-            description: "memorycon easy game",
-            previewCardsTime: 10,
-            turnTime: 10
-        },
-        gameHard: {
-            title: "Go Hard",
-            description: "memorycon hard game",
-            previewCardsTime: 2,
-            turnTime: 5
-        }
     }
 }

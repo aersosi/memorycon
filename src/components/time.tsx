@@ -1,48 +1,35 @@
 import Countdown from "@/components/countdown";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { getGameConfig } from "@/lib/config";
+import { useCallback } from "react";
 
 export default function Time() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
+    const config = getGameConfig(gameState.gameMode.isEasy);
 
-    const {playersRound, gameMode} = gameState;
-    const {gameEasy, gameHard} = gameMode;
-    const turnTime = gameMode.isEasy ? gameEasy.turnTime : gameHard.turnTime;
-    const previewCardsTime = gameMode.isEasy ? gameEasy.previewCardsTime : gameHard.previewCardsTime;
+    const handleTimeOver = useCallback(() => {
+        if (gameState.previewCards) {
+            dispatch({ type: 'END_PREVIEW' });
+        } else {
+            dispatch({ type: 'NEXT_ROUND' });
+        }
+    }, [gameState.previewCards, dispatch]);
 
-    const nextRound = () => {
-        dispatch({ type: "RESET_FLIPPED" });
-        dispatch({type: 'NEXT_ROUND'})
-    }
-
-    const endCardPreview = () => {
-        dispatch({type: 'END_PREVIEW'}) // end card preview
-    }
+    const timeLimit = gameState.previewCards ? config.previewTime : config.turnTime;
+    const label = gameState.previewCards ? "Vorschau" : "Rundenzeit";
 
     return (
-        <>
-            {gameState.previewCards ? (
-                <p>
-                    <span>Vorschauzeit: </span>
-                    <Countdown
-                        key="preview"
-                        initialTime={previewCardsTime}
-                        onTimeOver={endCardPreview}
-                    />
-                </p>
-            ) : (
-                <p className="flex gap-1">
-                    <span>Rundenzeit: </span>
-                    <span className="w-7 text-center">
-                        <Countdown
-                            key={`${playersRound.isRoundHuman}`}
-                            initialTime={turnTime}
-                            onTimeOver={nextRound}
-                        />
-                    </span>
-                    <span> Sek.</span>
-                </p>
-            )}
-        </>
+        <p className="flex gap-1">
+            <span>{label}: </span>
+            <span className="w-7 text-center">
+        <Countdown
+            key={`${gameState.previewCards}-${gameState.playersRound.isRoundHuman}`}
+            initialTime={timeLimit}
+            onTimeOver={handleTimeOver}
+        />
+      </span>
+            {!gameState.previewCards && <span> Sek.</span>}
+        </p>
     );
 }

@@ -54,10 +54,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         case 'SHOW_GAME':
             return {
                 ...state,
-                gameMode: {
-                    ...state.gameMode,
-                    showGame: action.payload,
-                },
+                showGame: action.payload,
             };
 
         case 'SET_GAME_MODE':

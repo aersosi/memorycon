@@ -1,16 +1,19 @@
 import { useGameState } from "@/contexts/gameContext";
 
 export function useRoundHumanString(stringHuman: string, stringComputer: string) {
-    // returns a string based on if it's humans/computers turn
+    // returns a string based on if it's humans/computers round
 
-    const gameState = useGameState();
-    return gameState.playersRound.isRoundHuman ? stringHuman : stringComputer
+    const { isGameEnd, playersRound } = useGameState();
+    if (isGameEnd) return;
+    return playersRound.isRoundHuman ? stringHuman : stringComputer;
 }
 
 export function useWinnerString(humanText: string, computerText: string, drawText: string) {
     // return a string based on if humans/computer/both are the winner
-    const gameState = useGameState();
-    const {humanPoints, computerPoints} = gameState.playersRound;
+
+    const { isGameEnd, playersRound } = useGameState();
+    if (!isGameEnd) return;
+    const { humanPoints, computerPoints } = playersRound;
 
     if (humanPoints > computerPoints) return humanText;     // human wins
     if (humanPoints < computerPoints) return computerText;  // computer wins

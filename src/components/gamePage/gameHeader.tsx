@@ -2,17 +2,20 @@ import Time from "@/components/time";
 import { useGameState } from "@/contexts/gameContext";
 import { useRoundHumanString } from "@/hooks/useStrings";
 import { useRoundStyles } from "@/hooks/useStyles";
+import { getGameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 export default function GameHeader() {
     const gameState = useGameState();
+    const config = getGameConfig(gameState.gameMode.isEasy);
+
     const {textColorRound} = useRoundStyles();
     const playerNameText = useRoundHumanString(gameState.playersRound.humanName, "Computer");
 
     const {playersRound, gameMode} = gameState;
     const {humanPoints, computerPoints, humanName} = playersRound;
 
-    const gameModeText = gameMode.isEasy ? "Easy Peasy" : "Go Hard";
+    const gameModeText = config.title;
 
     return (
         <header className="flex flex-col gap-4 justify-between text-xl">

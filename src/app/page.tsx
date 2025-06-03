@@ -13,8 +13,7 @@ export default function Home() {
 }
 
 function GamePages() {
-    const gameState = useGameState();
-    const {showGame} = gameState.gameMode;
+    const {showGame} = useGameState();
 
     return (
         <>

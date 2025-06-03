@@ -24,10 +24,10 @@ export default function StartPage() {
                 <StartInput></StartInput>
 
                 <Button onClick={goEasy} className="grow">
-                    {gameState.gameMode.gameEasy.title}
+                    Easy Peasy
                 </Button>
                 <Button onClick={goHard} className="grow">
-                    {gameState.gameMode.gameHard.title}
+                    Go Hard
                 </Button>
             </div>
         </div>
