@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useSimpleCountdown(duration: number, onComplete?: () => void) {
+export function useCountdown(duration: number, onComplete?: () => void) {
     const [startTime] = useState(() => Date.now());
     const [now, setNow] = useState(Date.now());
 

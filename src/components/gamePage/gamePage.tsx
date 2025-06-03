@@ -44,12 +44,9 @@ export default function GamePage() {
     }
 
     const hidePage = pageHidden && "opacity-0"
-    const resetFlipped = useCallback(() => {
-        dispatch({type: "RESET_FLIPPED"});
-    }, [dispatch]);
 
     useInitializeGame(shuffleTrigger, setCardEmojis);
-    useHandleCardMatch(flippedCardIndices, cardEmojis, resetFlipped);
+    useHandleCardMatch(flippedCardIndices, cardEmojis);
     useComputerTurn(handleCardFlip, cardEmojis, flippedCardIndices);
     useGameEnd(handleGameEnd);
 

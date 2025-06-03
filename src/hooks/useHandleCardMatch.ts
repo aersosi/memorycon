@@ -4,7 +4,6 @@ import { useEffect } from "react";
 export function useHandleCardMatch(
     flippedCardIndices: number[],
     cardEmojis: string[],
-    resetFlipped: () => void
 ) {
     const dispatch = useGameDispatch();
     const gameState = useGameState();
@@ -26,8 +25,7 @@ export function useHandleCardMatch(
         }
 
         const waitBeforeNextRound = setTimeout(() => {
-            resetFlipped();
-            // todo: dispatch wird getriggered obwohl isGameEnd false sein sollte. also ist isGameEnd nicht aktuell
+            dispatch({type: "RESET_FLIPPED"});
             if (!gameState.isGameEnd) dispatch({ type: "NEXT_ROUND" });
             }, 1000);
 
@@ -37,7 +35,6 @@ export function useHandleCardMatch(
         cardEmojis,
         dispatch,
         gameState.isRoundHuman,
-        gameState.isGameEnd,
-        resetFlipped
+        gameState.isGameEnd
     ]);
 }

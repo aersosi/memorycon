@@ -30,7 +30,7 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
 
             return () => clearTimeout(timer);
         }
-    }, [isPreview, gameState.gameMode, dispatch]);
+    }, [isPreview, gameState.gameModeEasy, dispatch, config.previewTime]);
 
     const isEmojiVisible = isPreview || isFlipped || isFound;
 

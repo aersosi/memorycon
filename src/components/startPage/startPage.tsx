@@ -1,11 +1,10 @@
 import StartHeader from "@/components/startPage/startHeader";
 import StartInput from "@/components/startPage/startInput";
 import { Button } from "@/components/ui/button";
-import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { useGameDispatch } from "@/contexts/gameContext";
 
 export default function StartPage() {
     const dispatch = useGameDispatch();
-    const gameState = useGameState();
 
     const goEasy = () => {
         dispatch({type: 'SET_GAME_MODE', payload: true})
