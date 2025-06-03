@@ -15,7 +15,7 @@ export type CardProps = {
 export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
-    const config = getGameConfig(gameState.gameMode.isEasy);
+    const config = getGameConfig(gameState.gameModeEasy);
 
     const { bgColorRound } = useRoundStyles();
 
@@ -46,7 +46,7 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
                 ${isPreview && "pointer-events-none"}
                 ${isFound && "pointer-events-none opacity-10"}
                 ${isFound && "pointer-events-none"}
-                ${!gameState.playersRound.isRoundHuman && "pointer-events-none"}
+                ${!gameState.isRoundHuman && "pointer-events-none"}
             `)}
             onClick={handleClick}
         >

@@ -22,27 +22,23 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         case 'SET_HUMAN_NAME':
             return {
                 ...state,
-                playersRound: {
-                    ...state.playersRound,
-                    humanName: action.payload,
-                },
+
+                humanName: action.payload,
             };
         case 'INCREMENT_HUMAN_POINTS':
             return {
                 ...state,
-                playersRound: {
-                    ...state.playersRound,
-                    humanPoints: state.playersRound.humanPoints + action.payload,
-                },
+
+                humanPoints: state.humanPoints + action.payload,
+
             };
 
         case 'INCREMENT_COMPUTER_POINTS':
             return {
                 ...state,
-                playersRound: {
-                    ...state.playersRound,
-                    computerPoints: state.playersRound.computerPoints + action.payload,
-                },
+
+                computerPoints: state.computerPoints + action.payload,
+
             };
 
         case 'PUSH_FOUND_MATCHES':
@@ -60,10 +56,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         case 'SET_GAME_MODE':
             return {
                 ...state,
-                gameMode: {
-                    ...state.gameMode,
-                    isEasy: action.payload,
-                },
+                gameModeEasy: action.payload,
             };
 
         case 'RESET_FLIPPED':
@@ -81,10 +74,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
         case 'NEXT_ROUND':
             return {
                 ...state,
-                playersRound: {
-                    ...state.playersRound,
-                    isRoundHuman: !state.playersRound.isRoundHuman,
-                },
+                isRoundHuman: !state.isRoundHuman,
             };
 
         case 'RESET_GAME':
@@ -110,7 +100,7 @@ function gameReducer(state: GameState, action: GameAction): GameState {
 const GameStateContext = createContext<GameState | undefined>(undefined);
 const GameDispatchContext = createContext<Dispatch<GameAction> | undefined>(undefined);
 
-export const GameProvider = ({ children }: { children: ReactNode }) => {
+export const GameProvider = ({children}: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(gameReducer, gameStateInitial);
 
     return (

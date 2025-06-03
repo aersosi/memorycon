@@ -5,8 +5,9 @@ import { useState, KeyboardEvent, useCallback, ChangeEvent, useRef } from "react
 
 export default function StartInput() {
     const dispatch = useGameDispatch();
-    const {playersRound} = useGameState();
-    const [inputValue, setInputValue] = useState(playersRound.humanName || "");
+    const {humanName} = useGameState();
+
+    const [inputValue, setInputValue] = useState(humanName || "");
     const inputRef = useRef<HTMLInputElement>(null);
 
     const handleKeyDown = useCallback(

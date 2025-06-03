@@ -8,10 +8,10 @@ export function useComputerTurn(
     flippedCardIndices: number[]
 ) {
     const gameState = useGameState();
-    const {playersRound, foundMatches, gameMode, previewCards} = gameState;
+    const {isRoundHuman, foundMatches, gameModeEasy, previewCards} = gameState;
 
     useEffect(() => {
-        if (gameState.isGameEnd || playersRound.isRoundHuman || flippedCardIndices.length > 0) return;
+        if (gameState.isGameEnd || isRoundHuman || flippedCardIndices.length > 0) return;
 
         const delaySecondCardFlip = setTimeout(() => {
             const availableCards = cardEmojis
@@ -22,7 +22,7 @@ export function useComputerTurn(
                 ? findDuplicates(cardEmojis, availableCards) ?? []
                 : shuffleArray(availableCards);
 
-            const [first, second] = gameMode.isEasy // easy game = 100% random
+            const [first, second] = gameModeEasy // easy game = 100% random
                 ? shuffleArray(availableCards)
                 : duplicatePair;
 
@@ -31,7 +31,7 @@ export function useComputerTurn(
         }, 1000);
 
         return () => clearTimeout(delaySecondCardFlip);
-    }, [gameState.isGameEnd, playersRound.isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameMode.isEasy, previewCards, handleCardFlip]);
+    }, [gameState.isGameEnd, isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameModeEasy, previewCards, handleCardFlip]);
 }
 
 

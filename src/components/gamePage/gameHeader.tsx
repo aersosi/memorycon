@@ -7,13 +7,12 @@ import { cn } from "@/lib/utils";
 
 export default function GameHeader() {
     const gameState = useGameState();
-    const config = getGameConfig(gameState.gameMode.isEasy);
+    const {humanPoints, computerPoints, humanName, gameModeEasy} = gameState;
+    const config = getGameConfig(gameModeEasy);
 
     const {textColorRound} = useRoundStyles();
-    const playerNameText = useRoundHumanString(gameState.playersRound.humanName, "Computer");
 
-    const {playersRound, gameMode} = gameState;
-    const {humanPoints, computerPoints, humanName} = playersRound;
+    const playerNameText = useRoundHumanString(humanName, "Computer");
 
     const gameModeText = config.title;
 

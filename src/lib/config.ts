@@ -1,48 +1,50 @@
 export type GameState = {
+    // Game Data
     allCards: string[];
     foundMatches: string[];
     flippedCardIndices: number[];
+
+    // Game Status
     isGameEnd: boolean;
     previewCards: boolean;
-    playersRound: {
-        isRoundHuman: boolean;
-        humanName: string;
-        humanPoints: number;
-        computerPoints: number;
-    };
     showGame: boolean;
-    gameMode: {
-        isEasy: boolean;
-    };
+    gameModeEasy: boolean;
+
+    // Player Data
+    isRoundHuman: boolean;
+    humanName: string;
+    humanPoints: number;
+    computerPoints: number;
 };
 
-export const getGameConfig = (isEasy: boolean) => ({
-    previewTime: isEasy ? 10 : 2,
-    turnTime: isEasy ? 10 : 5,
-    title: isEasy ? "Easy Peasy" : "Go Hard",
-    description: isEasy ? "memorycon easy game" : "memorycon hard game",
+export const getGameConfig = (gameModeEasy: boolean) => ({
+    previewTime: gameModeEasy ? 10 : 2,
+    turnTime: gameModeEasy ? 10 : 5,
+    title: gameModeEasy ? "Easy Peasy" : "Go Hard",
+    description: gameModeEasy ? "memorycon easy game" : "memorycon hard game",
 });
 
 export const gameStateInitial: GameState = {
+    // Game Data
     allCards: [
         "🧠", "🧠",
         "🦆", "🦆",
-        "💰", "💰", "🌻", "🌻",
+        // "💰", "💰", "🌻", "🌻",
         // "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
         // "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"
     ],
     foundMatches: [],
-    isGameEnd: false,
     flippedCardIndices: [],
+
+    // Game Status
+    isGameEnd: false,
     previewCards: true,
-    playersRound: {
-        isRoundHuman: true,
-        humanName: "Human",
-        humanPoints: 0,
-        computerPoints: 0,
-    },
     showGame: false,
-    gameMode: {
-        isEasy: true,
-    }
+    gameModeEasy: true,
+
+    // Player Data
+    isRoundHuman: true,
+    humanName: "Human",
+    humanPoints: 0,
+    computerPoints: 0,
 }

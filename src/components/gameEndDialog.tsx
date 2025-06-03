@@ -18,10 +18,9 @@ type GameEndDialogProps = {
 }
 
 export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
-    const gameState = useGameState();
+    const {humanPoints, computerPoints} = useGameState();
     const { textColorWinner } = useWinnerStyles();
 
-    const {humanPoints, computerPoints} = gameState.playersRound;
     const title = useWinnerString("Du hast gewonnen!", "Du hast verloren!", "Gleichstand!");
     const bodyCopy = useWinnerString("😍", "😭", "😑");
 

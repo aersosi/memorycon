@@ -18,7 +18,7 @@ export function useHandleCardMatch(
         if (e1 === e2) {
             dispatch({ type: "PUSH_FOUND_MATCHES", payload: [e1, e2] });
             dispatch({
-                type: gameState.playersRound.isRoundHuman
+                type: gameState.isRoundHuman
                     ? "INCREMENT_HUMAN_POINTS"
                     : "INCREMENT_COMPUTER_POINTS",
                 payload: 1,
@@ -36,7 +36,7 @@ export function useHandleCardMatch(
         flippedCardIndices,
         cardEmojis,
         dispatch,
-        gameState.playersRound.isRoundHuman,
+        gameState.isRoundHuman,
         gameState.isGameEnd,
         resetFlipped
     ]);
