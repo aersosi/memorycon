@@ -5,16 +5,17 @@ export default function Time() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
 
-    const {playersRound, gameMode, isGameEnd} = gameState;
+    const {playersRound, gameMode} = gameState;
     const {gameEasy, gameHard} = gameMode;
     const turnTime = gameMode.isEasy ? gameEasy.turnTime : gameHard.turnTime;
     const previewCardsTime = gameMode.isEasy ? gameEasy.previewCardsTime : gameHard.previewCardsTime;
 
-    const handleRoundTimeOver = () => {
-        dispatch({type: 'NEXT_ROUND'}) // go to next round
+    const nextRound = () => {
+        dispatch({ type: "RESET_FLIPPED" });
+        dispatch({type: 'NEXT_ROUND'})
     }
 
-    const handlePreviewTimeOver = () => {
+    const endCardPreview = () => {
         dispatch({type: 'END_PREVIEW'}) // end card preview
     }
 
@@ -26,8 +27,7 @@ export default function Time() {
                     <Countdown
                         key="preview"
                         initialTime={previewCardsTime}
-                        onTimeOver={handlePreviewTimeOver}
-                        stopOn={false}
+                        onTimeOver={endCardPreview}
                     />
                 </p>
             ) : (
@@ -37,8 +37,7 @@ export default function Time() {
                         <Countdown
                             key={`${playersRound.isRoundHuman}`}
                             initialTime={turnTime}
-                            onTimeOver={handleRoundTimeOver}
-                            stopOn={isGameEnd} // stop on GameEnd
+                            onTimeOver={nextRound}
                         />
                     </span>
                     <span> Sek.</span>

@@ -1,31 +1,46 @@
-import { useEffect, useState, useRef } from "react";
+import { useGameState } from "@/contexts/gameContext";
+import { useEffect, useRef, useState } from "react";
 
 type CountdownProps = {
     initialTime: number;
     onTimeOver?: () => void;
-    stopOn?: boolean;
 };
 
-export default function Countdown({ initialTime = 60, onTimeOver, stopOn = true }: CountdownProps) {
+export default function Countdown({ initialTime, onTimeOver}: CountdownProps) {
     const [timeLeft, setTimeLeft] = useState(initialTime);
-    const prevTimeLeftRef = useRef(timeLeft);
+    const intervalRef = useRef<NodeJS.Timeout | null>(null); // useRef to clear interval across later renders
+    const gameState = useGameState();
 
     useEffect(() => {
-        if (stopOn || timeLeft === 0) return;
+        // Wenn gestoppt oder Zeit vorbei, Timer stoppen
+        if (gameState.isGameEnd || timeLeft <= 0) {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
 
-        const timer = setInterval(() => {
-            setTimeLeft(prev => prev - 1);
-        }, 1000);
+            if (timeLeft === 0 && onTimeOver) {
+                onTimeOver();
+            }
 
-        return () => clearInterval(timer);
-    }, [stopOn, timeLeft]);
-
-    useEffect(() => {
-        if (prevTimeLeftRef.current > 0 && timeLeft === 0 && onTimeOver) {
-            onTimeOver();
+            return;
         }
-        prevTimeLeftRef.current = timeLeft;
-    }, [timeLeft, onTimeOver]);
+
+        // Start timer
+        if (!intervalRef.current) {
+            intervalRef.current = setInterval(() => {
+                setTimeLeft(prev => Math.max(prev - 1, 0));
+            }, 1000);
+        }
+
+        // Cleanup
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+        };
+    }, [timeLeft, onTimeOver, gameState.isGameEnd]);
 
     return <>{timeLeft}</>;
 }

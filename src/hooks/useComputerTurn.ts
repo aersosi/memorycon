@@ -7,12 +7,13 @@ export function useComputerTurn(
     cardEmojis: string[],
     flippedCardIndices: number[]
 ) {
-    const {playersRound, foundMatches, gameMode, previewCards} = useGameState();
+    const gameState = useGameState();
+    const {playersRound, foundMatches, gameMode, previewCards} = gameState;
 
     useEffect(() => {
-        if (playersRound.isRoundHuman || flippedCardIndices.length > 0) return;
+        if (gameState.isGameEnd || playersRound.isRoundHuman || flippedCardIndices.length > 0) return;
 
-        const timeout = setTimeout(() => {
+        const delaySecondCardFlip = setTimeout(() => {
             const availableCards = cardEmojis
                 .map((emoji, i) => (foundMatches.includes(emoji) ? null : i))
                 .filter((i): i is number => i !== null);
@@ -29,8 +30,8 @@ export function useComputerTurn(
             setTimeout(() => handleCardFlip(second), 500);
         }, 1000);
 
-        return () => clearTimeout(timeout);
-    }, [playersRound.isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameMode.isEasy, previewCards, handleCardFlip]);
+        return () => clearTimeout(delaySecondCardFlip);
+    }, [gameState.isGameEnd, playersRound.isRoundHuman, cardEmojis, foundMatches, flippedCardIndices, gameMode.isEasy, previewCards, handleCardFlip]);
 }
 
 

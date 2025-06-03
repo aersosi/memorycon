@@ -10,6 +10,8 @@ type GameAction =
     | { type: 'PUSH_FOUND_MATCHES'; payload: [string, string] }
     | { type: 'SHOW_GAME'; payload: boolean }
     | { type: 'SET_GAME_MODE'; payload: boolean }
+    | { type: 'RESET_FLIPPED' }
+    | { type: 'FLIP_CARD'; payload: number }
     | { type: 'NEXT_ROUND' }
     | { type: 'RESET_GAME' }
     | { type: 'GAME_END' }
@@ -65,6 +67,18 @@ function gameReducer(state: GameState, action: GameAction): GameState {
                     ...state.gameMode,
                     isEasy: action.payload,
                 },
+            };
+
+        case 'RESET_FLIPPED':
+            return {
+                ...state,
+                flippedCardIndices: [],
+            };
+
+        case 'FLIP_CARD':
+            return {
+                ...state,
+                flippedCardIndices: [...state.flippedCardIndices, action.payload],
             };
 
         case 'NEXT_ROUND':

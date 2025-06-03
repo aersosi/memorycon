@@ -1,6 +1,7 @@
 export type GameState = {
     allCards: string[];
     foundMatches: string[];
+    flippedCardIndices: number[];
     isGameEnd: boolean;
     previewCards: boolean;
     playersRound: {
@@ -29,13 +30,15 @@ export type GameState = {
 
 export const gameStateInitial: GameState = {
     allCards: [
-        "🧠", "🧠", "🦆", "🦆",
+        "🧠", "🧠",
+        "🦆", "🦆",
         "💰", "💰", "🌻", "🌻",
-        "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
-        "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"
+        // "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
+        // "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"
     ],
     foundMatches: [],
     isGameEnd: false,
+    flippedCardIndices: [],
     previewCards: true,
     playersRound: {
         isRoundHuman: true,
@@ -55,7 +58,7 @@ export const gameStateInitial: GameState = {
         gameHard: {
             title: "Go Hard",
             description: "memorycon hard game",
-            previewCardsTime: 5,
+            previewCardsTime: 2,
             turnTime: 5
         }
     }

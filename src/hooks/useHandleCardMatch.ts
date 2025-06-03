@@ -7,7 +7,7 @@ export function useHandleCardMatch(
     resetFlipped: () => void
 ) {
     const dispatch = useGameDispatch();
-    const { playersRound } = useGameState(); // Nur benötigte Werte extrahieren
+    const gameState = useGameState();
 
     useEffect(() => {
         if (flippedCardIndices.length !== 2) return;
@@ -18,24 +18,26 @@ export function useHandleCardMatch(
         if (e1 === e2) {
             dispatch({ type: "PUSH_FOUND_MATCHES", payload: [e1, e2] });
             dispatch({
-                type: playersRound.isRoundHuman
+                type: gameState.playersRound.isRoundHuman
                     ? "INCREMENT_HUMAN_POINTS"
                     : "INCREMENT_COMPUTER_POINTS",
                 payload: 1,
             });
         }
 
-        const timeout = setTimeout(() => {
+        const waitBeforeNextRound = setTimeout(() => {
             resetFlipped();
-            dispatch({ type: "NEXT_ROUND" });
-        }, 1000);
+            // todo: dispatch wird getriggered obwohl isGameEnd false sein sollte. also ist isGameEnd nicht aktuell
+            if (!gameState.isGameEnd) dispatch({ type: "NEXT_ROUND" });
+            }, 1000);
 
-        return () => clearTimeout(timeout);
+        return () => clearTimeout(waitBeforeNextRound);
     }, [
         flippedCardIndices,
         cardEmojis,
         dispatch,
-        playersRound.isRoundHuman,
+        gameState.playersRound.isRoundHuman,
+        gameState.isGameEnd,
         resetFlipped
     ]);
 }
