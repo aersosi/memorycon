@@ -9,13 +9,13 @@ export function useHandleCardMatch(
     const gameState = useGameState();
 
     useEffect(() => {
-        if (flippedCardIndices.length !== 2) return;
+        if (gameState.isGameEnd || flippedCardIndices.length !== 2) return;
 
         const [i1, i2] = flippedCardIndices;
         const [e1, e2] = [cardEmojis[i1], cardEmojis[i2]];
 
         if (e1 === e2) {
-            dispatch({ type: "PUSH_FOUND_MATCHES", payload: [e1, e2] });
+            dispatch({type: "PUSH_FOUND_MATCHES", payload: [e1, e2]});
             dispatch({
                 type: gameState.isRoundHuman
                     ? "INCREMENT_HUMAN_POINTS"
@@ -26,8 +26,8 @@ export function useHandleCardMatch(
 
         const waitBeforeNextRound = setTimeout(() => {
             dispatch({type: "RESET_FLIPPED"});
-            if (!gameState.isGameEnd) dispatch({ type: "NEXT_ROUND" });
-            }, 1000);
+            dispatch({type: "NEXT_ROUND"});
+        }, 1000);
 
         return () => clearTimeout(waitBeforeNextRound);
     }, [

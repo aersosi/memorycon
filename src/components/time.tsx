@@ -4,7 +4,7 @@ import { getGameConfig } from "@/lib/config";
 import { useCallback } from "react";
 
 export default function Time() {
-    const {previewCards, isRoundHuman, gameModeEasy} = useGameState();
+    const {previewCards, isRoundHuman, gameModeEasy, flippedCardIndices, isGameEnd} = useGameState();
     const dispatch = useGameDispatch();
     const config = getGameConfig(gameModeEasy);
 
@@ -12,9 +12,12 @@ export default function Time() {
         if (previewCards) {
             dispatch({type: 'END_PREVIEW'});
         } else {
-            dispatch({type: 'NEXT_ROUND'});
+            if (flippedCardIndices.length === 1) {
+                dispatch({type: 'RESET_FLIPPED'});
+            }
+            if (!isGameEnd) dispatch({type: 'NEXT_ROUND'});
         }
-    }, [previewCards, dispatch]);
+    }, [previewCards, flippedCardIndices.length, dispatch, isGameEnd]);
 
     const timeLimit = previewCards ? config.previewTime : config.turnTime;
     const label = previewCards ? "Vorschau" : "Rundenzeit";
