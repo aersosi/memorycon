@@ -1,5 +1,5 @@
-import StartHeader from "@/components/startPage/startHeader";
-import StartInput from "@/components/startPage/startInput";
+import StartHeader from "@/pages/start/startHeader";
+import StartInput from "@/pages/start/startInput";
 import { Button } from "@/components/ui/button";
 import { useGameDispatch } from "@/contexts/gameContext";
 
@@ -7,12 +7,12 @@ export default function StartPage() {
     const dispatch = useGameDispatch();
 
     const goEasy = () => {
-        dispatch({type: 'SET_GAME_MODE', payload: true})
+        dispatch({type: 'SET_GAME_EASY', payload: true})
         dispatch({type: 'SHOW_GAME', payload: true})
     }
 
     const goHard = () => {
-        dispatch({type: 'SET_GAME_MODE', payload: false})
+        dispatch({type: 'SET_GAME_EASY', payload: false})
         dispatch({type: 'SHOW_GAME', payload: true})
     }
 

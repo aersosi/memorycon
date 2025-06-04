@@ -1,14 +1,7 @@
 import { useWinnerString } from "@/hooks/useStrings";
 import { useWinnerStyles } from "@/hooks/useStyles";
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
 import { useGameState } from "@/contexts/gameContext";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +12,7 @@ type GameEndDialogProps = {
 
 export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
     const {humanPoints, computerPoints} = useGameState();
-    const { textColorWinner } = useWinnerStyles();
+    const {textColorWinner} = useWinnerStyles();
 
     const title = useWinnerString("Du hast gewonnen!", "Du hast verloren!", "Gleichstand!");
     const bodyCopy = useWinnerString("😍", "😭", "😑");

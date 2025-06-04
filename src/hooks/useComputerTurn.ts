@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useGameState } from "@/contexts/gameContext";
-import { findDuplicates, shuffleArray } from "@/lib/utils";
+import { findDuplicateEmojiIndex, shuffleArray } from "@/lib/utils";
 
 export function useComputerTurn(
     handleCardFlip: (index: number) => void,
@@ -19,7 +19,7 @@ export function useComputerTurn(
                 .filter((i): i is number => i !== null);
 
             const duplicatePair = Math.random() < 0.5 // 50% chance auf gleiche Karten
-                ? findDuplicates(cardEmojis, availableCards) ?? []
+                ? findDuplicateEmojiIndex(cardEmojis, availableCards) ?? []
                 : shuffleArray(availableCards);
 
             const [first, second] = gameModeEasy // easy game = 100% random

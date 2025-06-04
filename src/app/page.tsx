@@ -1,7 +1,7 @@
 "use client"
 
-import GamePage from "@/components/gamePage/gamePage";
-import StartPage from "@/components/startPage/startPage";
+import GamePage from "@/pages/game/gamePage";
+import StartPage from "@/pages/start/startPage";
 import { GameProvider, useGameState } from "@/contexts/gameContext"
 
 export default function Home() {

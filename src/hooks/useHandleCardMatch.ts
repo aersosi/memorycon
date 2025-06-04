@@ -15,7 +15,7 @@ export function useHandleCardMatch(
         const [e1, e2] = [cardEmojis[i1], cardEmojis[i2]];
 
         if (e1 === e2) {
-            dispatch({type: "PUSH_FOUND_MATCHES", payload: [e1, e2]});
+            dispatch({type: "SET_FOUND_MATCHES", payload: [e1, e2]});
             dispatch({
                 type: gameState.isRoundHuman
                     ? "INCREMENT_HUMAN_POINTS"
