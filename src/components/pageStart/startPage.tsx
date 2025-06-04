@@ -1,5 +1,5 @@
-import StartHeader from "@/pages/start/startHeader";
-import StartInput from "@/pages/start/startInput";
+import StartHeader from "@/components/pageStart/startHeader";
+import StartInput from "@/components/pageStart/startInput";
 import { Button } from "@/components/ui/button";
 import { useGameDispatch } from "@/contexts/gameContext";
 

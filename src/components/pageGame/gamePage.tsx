@@ -2,14 +2,14 @@
 
 import Card from "@/components/card";
 import GameEndDialog from "@/components/gameEndDialog";
-import GameHeader from "@/pages/game/gameHeader";
+import GameHeader from "@/components/pageGame/gameHeader";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
 import { useHandleCardMatch } from "@/hooks/useHandleCardMatch";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
 import { useCallback, useState } from "react";
-import { Button } from "../../components/ui/button";
+import { Button } from "@/components/ui/button";
 
 export default function GamePage() {
     const gameState = useGameState();
