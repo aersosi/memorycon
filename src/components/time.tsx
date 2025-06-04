@@ -24,15 +24,15 @@ export default function Time() {
 
     return (
         <p className="flex gap-1">
-            <span>{label}: </span>
-            <span className="w-7 text-center">
+            <span className="text-accent">{label}: </span>
+            <span className="w-7 text-center font-semibold">
                 <Countdown
                     key={`${previewCards}-${isRoundHuman}`}
                     initialTime={timeLimit}
                     onTimeOver={handleTimeOver}
                 />
             </span>
-            <span> Sek.</span>
+            <span className="text-accent"> Sek.</span>
         </p>
     );
 }

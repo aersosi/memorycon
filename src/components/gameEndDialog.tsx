@@ -1,5 +1,4 @@
 import { useWinnerString } from "@/hooks/useStrings";
-import { useWinnerStyles } from "@/hooks/useStyles";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
 import { useGameState } from "@/contexts/gameContext";

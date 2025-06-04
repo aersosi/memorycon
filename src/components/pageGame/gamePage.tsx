@@ -51,9 +51,10 @@ export default function GamePage() {
     useGameEnd(handleGameEnd);
 
     return (
-        <div className={`${hidePage} border transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
+
+        <div className={`${hidePage} h-full transition-opacity duration-250 flex flex-col items-center justify-center gap-8 w-full max-w-[1024px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12`}>
             <GameHeader/>
-            <main className="grid grid-cols-6 grid-rows-6 gap-4 grow">
+            <main className="grid grid-cols-6 grid-rows-6 gap-4 grow w-full">
                 {cardEmojis.map((emoji, i) => (
                     <Card
                         key={i}
@@ -66,7 +67,7 @@ export default function GamePage() {
                 ))}
             </main>
             <footer className="flex">
-                <Button onClick={handleRestartGame} variant="outline" className="w-1/2 mx-auto">
+                <Button onClick={handleRestartGame} variant="outline">
                     Zum Anfang
                 </Button>
             </footer>

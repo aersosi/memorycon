@@ -26,7 +26,7 @@ export default function StartPage() {
                 <StartInput/>
             </div>
 
-            <p className="text-center text-balance text-lg font-medium w-full">
+            <p className="text-center text-balance text-lg font-semibold w-full">
                 Wählen Sie einen Schwierigkeitsgrad, um das Spiel zu beginnen. <br/>
                 Welcher Spieler beginnt, wird zufällig bestimmt.
             </p>
