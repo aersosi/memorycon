@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-// Filterfunktion, die maximal zwei gleiche Elemente behält
+// Array keeps a maximum of two identical elements
 export const filterToMaxTwo = <T>(array: T[]): T[] => {
     const counts = new Map<T, number>();
     const filtered: T[] = [];
@@ -20,19 +20,37 @@ export const filterToMaxTwo = <T>(array: T[]): T[] => {
     return filtered;
 }
 
+// Doubles single elements in arrey
+export function duplicateUniqueElements<T>(arr: T[]): T[] {
+    const counts = new Map<T, number>();
+
+    // Count occurrences of each element
+    for (const item of arr) {
+        counts.set(item, (counts.get(item) || 0) + 1);
+    }
+
+    // Find all elements that appear only once
+    const uniqueElements: T[] = arr.filter(item => counts.get(item) === 1);
+
+    // Push duplicates of all unique elements
+    for (const unique of uniqueElements) {
+        arr.push(unique);
+    }
+
+    return arr;
+}
+
 export const shuffleArray = <T>(array: T[]): T[] => {
-    // Filtere Array auf max 2 Vorkommen pro Element
-    const filtered = filterToMaxTwo(array);
 
     // Shuffle filtered array
-    let currentIndex = filtered.length;
+    let currentIndex = array.length;
     while (currentIndex !== 0) {
         const randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-        [filtered[currentIndex], filtered[randomIndex]] = [filtered[randomIndex], filtered[currentIndex]];
+        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
 
-    return filtered;
+    return array;
 }
 
 export function findDuplicateEmojiIndex(cardEmojis: string[], availableCards: number[]): [number, number] | null {

@@ -1,11 +1,11 @@
-import { getGameConfig } from "@/lib/config";
+import { gameConfig } from "@/lib/config";
 
-describe('getGameConfig', () => {
+describe('gameConfig', () => {
 
     describe('Check that all properties exist', () => {
         it('should always return an object with previewTime. turnTime, title, description', () => {
-            const easyConfig = getGameConfig(true);
-            const hardConfig = getGameConfig(false);
+            const easyConfig = gameConfig(true);
+            const hardConfig = gameConfig(false);
 
             expect(easyConfig).toHaveProperty('previewTime');
             expect(easyConfig).toHaveProperty('turnTime');
@@ -22,7 +22,7 @@ describe('getGameConfig', () => {
     describe('gameModeEasy === true (Easy Game)', () => {
         it('should return a config with previewTime/turnTime > 0, and ' +
             'title/description string.length between 1 and 256', () => {
-            const easyGame = getGameConfig(true);
+            const easyGame = gameConfig(true);
 
             expect(typeof easyGame.previewTime).toBe('number');
             expect(easyGame.previewTime).toBeGreaterThan(0);
@@ -42,7 +42,7 @@ describe('getGameConfig', () => {
 
     describe('gameModeEasy === false (Hard Game)', () => {
         it('should return hard mode configuration', () => {
-            const hardGame = getGameConfig(true);
+            const hardGame = gameConfig(true);
 
             expect(typeof hardGame.previewTime).toBe('number');
             expect(hardGame.previewTime).toBeGreaterThan(0);

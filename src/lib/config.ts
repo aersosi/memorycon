@@ -17,7 +17,7 @@ export type GameState = {
     computerPoints: number;
 };
 
-export const getGameConfig = (gameModeEasy: boolean) => ({
+export const gameConfig = (gameModeEasy: boolean) => ({
     previewTime: gameModeEasy ? 10 : 5,
     turnTime: gameModeEasy ? 10 : 5,
     title: gameModeEasy ? "Easy Peasy" : "Go Hard",
@@ -28,7 +28,7 @@ export const gameStateInitial: GameState = {
     // Game Data
     allCards: [
         "🧠", "🧠",
-        "🦆", "🦆","🦆",
+        "🦆", "🦆",
         // "💰", "💰", "🌻", "🌻",
         // "🌝", "🌝", "🔥", "🔥", "🍉", "🍉", "💎", "💎", "🚀", "🚀",
         // "🕹️", "🕹️", "⚔️", "⚔️", "🛒", "🛒", "❤️", "❤️", "❓", "❓", "🔔", "🔔", "🏴‍☠️", "🏴‍☠️", "🕶️", "🕶️", "🧯", "🧯"

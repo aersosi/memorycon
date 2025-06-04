@@ -1,12 +1,12 @@
 import Countdown from "@/components/countdown";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
-import { getGameConfig } from "@/lib/config";
+import { gameConfig } from "@/lib/config";
 import { useCallback } from "react";
 
 export default function Time() {
     const {previewCards, isRoundHuman, gameModeEasy, flippedCardIndices, isGameEnd} = useGameState();
     const dispatch = useGameDispatch();
-    const config = getGameConfig(gameModeEasy);
+    const config = gameConfig(gameModeEasy);
 
     const handleTimeOver = useCallback(() => {
         if (previewCards) {

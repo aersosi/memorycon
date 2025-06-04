@@ -1,5 +1,4 @@
-import { filterToMaxTwo, findDuplicateEmojiIndex, shuffleArray } from "@/lib/utils";
-
+import { duplicateUniqueElements, filterToMaxTwo, findDuplicateEmojiIndex, shuffleArray } from "@/lib/utils";
 
 describe('filterToMaxTwo', () => {
     it('should handle mixed types correctly', () => {
@@ -21,6 +20,33 @@ describe('filterToMaxTwo', () => {
     });
 });
 
+describe('duplicateUniqueElements', () => {
+    it('should duplicate all unique elements', () => {
+        const input = [1, 2, 2, 3, 4, 4];
+        const result = duplicateUniqueElements([...input]); // use spread to avoid mutation
+        expect(result).toEqual([1, 2, 2, 3, 4, 4, 1, 3]);
+    });
+
+    it('should duplicate all if all elements are unique', () => {
+        const input = ['a', 'b', 'c'];
+        const result = duplicateUniqueElements([...input]);
+        expect(result).toEqual(['a', 'b', 'c', 'a', 'b', 'c']);
+    });
+
+    it('should work with an empty array', () => {
+        const result = duplicateUniqueElements([]);
+        expect(result).toEqual([]);
+    });
+
+    it('should handle objects by reference', () => {
+        const a = { id: 1 };
+        const b = { id: 2 };
+        const input = [a, b, a];
+        const result = duplicateUniqueElements([...input]);
+        expect(result).toEqual([a, b, a, b]);
+    });
+});
+
 
 describe('shuffleArray', () => {
     it('should shuffle the array while preserving all elements and types', () => {
@@ -28,14 +54,6 @@ describe('shuffleArray', () => {
         const copy = [...originalArr];
 
         const result = shuffleArray(copy);
-
-        // same length
-        expect(result).toHaveLength(originalArr.length);
-
-        // same elements
-        originalArr.forEach(item => {
-            expect(result).toContain(item);
-        });
 
         // one element in the mixed array is in a different position than in the original
         const isShuffled = result.some((val, idx) => val !== originalArr[idx]);

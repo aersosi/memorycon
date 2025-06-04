@@ -1,6 +1,6 @@
 import { useRoundStyles } from "@/hooks/useStyles";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
-import { getGameConfig } from "@/lib/config";
+import { gameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { useEffect } from "react";
 
@@ -15,7 +15,7 @@ export type CardProps = {
 export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
-    const config = getGameConfig(gameState.gameModeEasy);
+    const config = gameConfig(gameState.gameModeEasy);
 
     const { bgColorRound } = useRoundStyles();
 

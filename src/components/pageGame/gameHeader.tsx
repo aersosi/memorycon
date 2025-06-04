@@ -2,13 +2,13 @@ import Time from "@/components/time";
 import { useGameState } from "@/contexts/gameContext";
 import { useRoundHumanString } from "@/hooks/useStrings";
 import { useRoundStyles } from "@/hooks/useStyles";
-import { getGameConfig } from "@/lib/config";
+import { gameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 
 export default function GameHeader() {
     const gameState = useGameState();
     const {humanPoints, computerPoints, humanName, gameModeEasy} = gameState;
-    const config = getGameConfig(gameModeEasy);
+    const config = gameConfig(gameModeEasy);
 
     const {textColorRound} = useRoundStyles();
 
