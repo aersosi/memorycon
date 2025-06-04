@@ -4,6 +4,11 @@ import { GameState, gameStateInitial } from "@/lib/config";
 import { duplicateUniqueElements, filterToMaxTwo } from "@/lib/utils";
 import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react';
 
+// make sure allCards array has the right elements
+const maxTwoElements = filterToMaxTwo(gameStateInitial.allCards);
+const noSingleElements = duplicateUniqueElements(maxTwoElements);
+gameStateInitial.allCards = noSingleElements;
+
 type GameAction =
     | { type: 'SET_HUMAN_NAME'; payload: string }
     | { type: 'INCREMENT_HUMAN_POINTS'; payload: number }
@@ -100,11 +105,6 @@ const GameDispatchContext = createContext<Dispatch<GameAction> | undefined>(unde
 
 export const GameProvider = ({children}: { children: ReactNode }) => {
     const [state, dispatch] = useReducer(gameReducer, gameStateInitial);
-
-    // make sure allCards array has the right elements
-    const maxTwoElements = filterToMaxTwo(state.allCards);
-    const noSingleElements = duplicateUniqueElements(maxTwoElements);
-    state.allCards = noSingleElements;
 
     return (
         <GameStateContext.Provider value={state}>
