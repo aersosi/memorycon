@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
+    --color-background: var(--color-holi-900);
+    --color-foreground: var(--color-holi-50);
 
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
