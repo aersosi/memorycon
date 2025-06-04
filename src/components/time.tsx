@@ -1,12 +1,15 @@
 import Countdown from "@/components/countdown";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { useRoundStyles } from "@/hooks/useStyles";
 import { gameConfig } from "@/lib/config";
+import { cn } from "@/lib/utils";
 import { useCallback } from "react";
 
 export default function Time() {
     const {previewCards, isRoundHuman, gameModeEasy, flippedCardIndices, isGameEnd} = useGameState();
     const dispatch = useGameDispatch();
     const config = gameConfig(gameModeEasy);
+    const {textColorRound} = useRoundStyles();
 
     const handleTimeOver = useCallback(() => {
         if (previewCards) {
@@ -24,7 +27,7 @@ export default function Time() {
 
     return (
         <p className="flex gap-1">
-            <span className="text-accent">{label}: </span>
+            <span className={cn(`${textColorRound}`)}>{label}: </span>
             <span className="w-7 text-center font-semibold">
                 <Countdown
                     key={`${previewCards}-${isRoundHuman}`}
@@ -32,7 +35,7 @@ export default function Time() {
                     onTimeOver={handleTimeOver}
                 />
             </span>
-            <span className="text-accent"> Sek.</span>
+            <span className={cn(`${textColorRound}`)}> Sek.</span>
         </p>
     );
 }

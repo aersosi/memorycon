@@ -17,7 +17,7 @@ export default function StartPage() {
 
     return (
         <div className="flex flex-col items-center justify-center gap-14 w-full max-w-[720px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12">
-            <header className="flex flex-col justify-between items-center w-full transition-colors hover:text-holi-500">
+            <header className="flex flex-col justify-between items-center w-full">
                 <h2 className="text-h2-clamp ">Wilkommen zu</h2>
                 <h1 className="text-h1-clamp leading-8 font-semibold">memorycon</h1>
             </header>

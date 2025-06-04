@@ -22,15 +22,19 @@ export default function GameHeader() {
             </div>
             <div className="flex gap-4 justify-between w-full">
                 <p className="">
-                    <span className="text-accent">Modus: </span>
+                    <span className={cn(`${textColorRound}`)}>Modus: </span>
                     <span className="font-semibold">{gameModeText}</span>
                 </p>
 
                 <div className="flex gap-6">
-                    <p><span className="text-accent">{humanName}</span>: <span
-                        className="font-semibold">{humanPoints}</span></p>
-                    <p><span className="text-accent">Computer</span>: <span
-                        className="font-semibold">{computerPoints}</span></p>
+                    <p>
+                        <span className={cn(`${textColorRound}`)}>{humanName}: </span>
+                        <span className="font-semibold">{humanPoints}</span>
+                    </p>
+                    <p>
+                        <span className={cn(`${textColorRound}`)}>Computer: </span>
+                        <span className="font-semibold">{computerPoints}</span>
+                    </p>
                 </div>
 
                 <Time/>

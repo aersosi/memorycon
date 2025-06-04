@@ -70,7 +70,7 @@ type CardSideProps = {
 
 export function CardSide({className = "", children}: CardSideProps) {
     return (
-        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-4xl 
+        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-2xl md:text-4xl 
                 transition-all duration-500 backface-hidden [transform-style:preserve-3d] ${className}`}
         >
             {children}
