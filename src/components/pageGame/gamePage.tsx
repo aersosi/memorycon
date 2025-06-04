@@ -51,7 +51,7 @@ export default function GamePage() {
     useGameEnd(handleGameEnd);
 
     return (
-        <div className={`${hidePage} transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
+        <div className={`${hidePage} border transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
             <GameHeader/>
             <main className="grid grid-cols-6 grid-rows-6 gap-4 grow">
                 {cardEmojis.map((emoji, i) => (

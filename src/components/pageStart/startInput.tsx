@@ -31,9 +31,9 @@ export default function StartInput() {
     );
 
     return (
-        <div className="grid gap-3 pb-8">
+        <>
             <Label htmlFor="Ihr Name">
-                <span className="text-lg text-holi-500">Ihr Name</span>
+                <span className="text-lg">Ihr Name</span>
             </Label>
             <Input type="text"
                    id="humanName"
@@ -41,8 +41,9 @@ export default function StartInput() {
                    value={inputValue}
                    onKeyDown={handleKeyDown}
                    onChange={handleChange}
-                   placeholder="Ihr Name"/>
-            <p className="opacity-50">Sie können das Feld auch frei lassen.</p>
-        </div>
+                   placeholder="Ihr Name"
+            />
+            <p className="text-accent text-sm">Sie können dieses Feld auch frei lassen</p>
+        </>
     );
 }

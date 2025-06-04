@@ -1,4 +1,3 @@
-import StartHeader from "@/components/pageStart/startHeader";
 import StartInput from "@/components/pageStart/startInput";
 import { Button } from "@/components/ui/button";
 import { useGameDispatch } from "@/contexts/gameContext";
@@ -17,15 +16,25 @@ export default function StartPage() {
     }
 
     return (
-        <div className="h-full flex flex-col items-center gap-16 p-12">
-            <StartHeader/>
-            <div className="flex flex-col gap-4 w-full max-w-lg">
-                <StartInput></StartInput>
+        <div className="flex flex-col items-center justify-center gap-14 w-full max-w-[720px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12">
+            <header className="flex flex-col justify-between items-center w-full transition-colors hover:text-holi-500">
+                <h2 className="text-h2-clamp ">Wilkommen zu</h2>
+                <h1 className="text-h1-clamp leading-8 font-semibold">memorycon</h1>
+            </header>
 
-                <Button onClick={goEasy} className="grow">
+            <div className="grid gap-3 w-full">
+                <StartInput/>
+            </div>
+
+            <p className="text-center text-balance text-lg font-medium w-full">
+                Wählen Sie einen Schwierigkeitsgrad, um das Spiel zu beginnen. <br/>
+                Welcher Spieler beginnt, wird zufällig bestimmt.
+            </p>
+            <div className="flex flex-col gap-6 w-full">
+                <Button onClick={goEasy} className="grow" variant="outline">
                     Easy Peasy
                 </Button>
-                <Button onClick={goHard} className="grow">
+                <Button onClick={goHard} className="grow" variant="outline">
                     Go Hard
                 </Button>
             </div>

@@ -26,13 +26,13 @@ export default function Time() {
         <p className="flex gap-1">
             <span>{label}: </span>
             <span className="w-7 text-center">
-        <Countdown
-            key={`${previewCards}-${isRoundHuman}`}
-            initialTime={timeLimit}
-            onTimeOver={handleTimeOver}
-        />
-      </span>
-            {!previewCards && <span> Sek.</span>}
+                <Countdown
+                    key={`${previewCards}-${isRoundHuman}`}
+                    initialTime={timeLimit}
+                    onTimeOver={handleTimeOver}
+                />
+            </span>
+            <span> Sek.</span>
         </p>
     );
 }
