@@ -4,7 +4,7 @@
   &:after {
     position: absolute;
     content: "";
-    background-image: radial-gradient(#ffffff1c 8%, #0000 8%);
+    background-image: radial-gradient(var(--color-holi-700) 8%, rgba(0,0,0,0) 8%);
     background-size: 24px 24px;
     inset: 1rem;
     z-index: -1;

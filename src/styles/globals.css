@@ -44,21 +44,6 @@
     --radius-xl: calc(var(--radius) + 4px);
 }
 
-
-@theme {
-    --color-holi-50: hsl(73, 100%, 96%);
-    --color-holi-100: hsl(85, 100%, 93.8%);
-    --color-holi-200: hsl(97, 100%, 82%);
-    --color-holi-300: hsl(109, 90.7%, 70.2%);
-    --color-holi-400: hsl(121, 81.3%, 58.3%);
-    --color-holi-500: hsl(133, 72%, 46.5%);
-    --color-holi-600: hsl(144, 62.7%, 34.7%);
-    --color-holi-700: hsl(156, 53.3%, 22.8%);
-    --color-holi-800: hsl(168, 44%, 11%);
-    --color-holi-900: hsl(180, 34.7%, 8%);
-    --color-holi-950: hsl(192, 25.3%, 5%);
-}
-
 @theme {
     --color-holi-50: hsl(73, 100%, 96%);
     --color-holi-100: hsl(85, 100%, 93.8%);
@@ -67,7 +52,7 @@
     --color-holi-400: hsl(121, 81.3%, 58.3%);
     --color-holi-500: hsl(133, 72%, 46.5%);
     --color-holi-600: hsl(144, 62.7%, 34.7%);
-    --color-holi-700: hsl(156, 53.3%, 22.8%);
+    --color-holi-700: hsl(158, 50.3%, 20.8%);
     --color-holi-800: hsl(168, 44%, 11%); /* dark #102924 */
     --color-holi-900: hsl(180, 34.7%, 8%);
     --color-holi-950: hsl(192, 25.3%, 5%);
