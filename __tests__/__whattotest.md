@@ -2,7 +2,7 @@
 
 ## Hohe Priorität
 - [x] src/contexts/gameContext.tsx: `gameReducer` – Teste alle Action-Types und State-Transitions
-- [ ] src/pages/game/gamePage.tsx: `GamePage` – Teste Kartenrendering, `handleCardFlip`, `handleRestartGame` und Dialog-Anzeige
+- [x] src/pages/game/gamePage.tsx: `GamePage` – Teste Kartenrendering, `handleCardFlip`, `handleRestartGame` und Dialog-Anzeige
 - [ ] src/components/gameCard.tsx: `GameCard` – Teste Emoji-Sichtbarkeit, Klickbedingungen und Preview-Logik
 - [x] src/components/countdown.tsx: `Countdown` – Teste Timer-Logik und `onTimeOver` Callback
 - [ ] src/components/gameTime.tsx: `GameTime` – Teste bedingte Zeit-Anzeige und Dispatches
