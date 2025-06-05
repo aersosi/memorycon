@@ -2,11 +2,7 @@ import { useWinnerString } from "@/hooks/useStrings";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, } from "@/components/ui/dialog";
 import { useGameState } from "@/contexts/gameContext";
-
-type GameEndDialogProps = {
-    isOpen?: boolean,
-    onButton?: () => void
-}
+import { GameEndDialogProps } from "@/types/props";
 
 export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
     const {humanPoints, computerPoints} = useGameState();

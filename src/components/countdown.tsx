@@ -1,10 +1,6 @@
 import { useGameState } from "@/contexts/gameContext";
 import { useCountdown } from "@/hooks/useCountdown";
-
-type CountdownProps = {
-    initialTime: number;
-    onTimeOver?: () => void;
-};
+import { CountdownProps } from "@/types/props";
 
 export default function Countdown({ initialTime, onTimeOver }: CountdownProps) {
     const gameState = useGameState();

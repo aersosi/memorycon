@@ -2,15 +2,8 @@ import { useRoundStyles } from "@/hooks/useStyles";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { gameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { CardProps, CardSideProps } from "@/types/props";
 import { useEffect } from "react";
-
-export type CardProps = {
-    emoji: string,
-    isFlipped: boolean,
-    isFound: boolean,
-    isPreview: boolean,
-    onFlip: () => void,
-};
 
 export default function GameCard({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
@@ -62,11 +55,6 @@ export default function GameCard({emoji, isFlipped, isFound, isPreview, onFlip}:
         </div>
     );
 }
-
-type CardSideProps = {
-    className?: string;
-    children?: React.ReactNode;
-};
 
 export function CardSide({className = "", children}: CardSideProps) {
     return (
