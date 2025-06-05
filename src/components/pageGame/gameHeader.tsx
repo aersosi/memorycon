@@ -1,4 +1,4 @@
-import Time from "@/components/time";
+import GameTime from "@/components/pageGame/gameTime";
 import { useGameState } from "@/contexts/gameContext";
 import { useRoundHumanString } from "@/hooks/useStrings";
 import { useRoundStyles } from "@/hooks/useStyles";
@@ -16,15 +16,17 @@ export default function GameHeader() {
 
     return (
         <header className="flex flex-col gap-4 justify-between text-xl w-full">
-            <div className="flex gap-8 justify-between items-end">
+            <div className="flex gap-4 justify-between items-end flex-wrap">
                 <h1 className={cn(`text-4xl font-semibold`)}>memorycon</h1>
                 <p className={cn(`text-3xl ${textColorRound}`)}>{playerNameText} ist dran</p>
             </div>
-            <div className="flex gap-4 justify-between w-full">
-                <p className="">
+            <div className="flex gap-4 justify-between w-full flex-wrap">
+                <p>
                     <span className={cn(`${textColorRound}`)}>Modus: </span>
                     <span className="font-semibold">{gameModeText}</span>
                 </p>
+
+                <GameTime/>
 
                 <div className="flex gap-6">
                     <p>
@@ -37,7 +39,6 @@ export default function GameHeader() {
                     </p>
                 </div>
 
-                <Time/>
             </div>
         </header>
     );

@@ -12,7 +12,7 @@ export type CardProps = {
     onFlip: () => void,
 };
 
-export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
+export default function GameCard({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
     const config = gameConfig(gameState.gameModeEasy);

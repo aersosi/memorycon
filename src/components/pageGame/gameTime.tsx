@@ -5,7 +5,7 @@ import { gameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { useCallback } from "react";
 
-export default function Time() {
+export default function GameTime() {
     const {previewCards, isRoundHuman, gameModeEasy, flippedCardIndices, isGameEnd} = useGameState();
     const dispatch = useGameDispatch();
     const config = gameConfig(gameModeEasy);

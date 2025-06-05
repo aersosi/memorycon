@@ -3,7 +3,7 @@
 ## game meachanics
 
 1. Ziel: Alle Paare müssen gefunden werden
-   - [ ] `gameEnd === true` -> `if (allCards.length === foundMatches.length)`
+   - [x] `gameEnd === true` -> `if (allCards.length === foundMatches.length)`
 
 2. Es gibt Runden (human und computer wechseln sich ab)
     - [x] Vor der ersten Runde sieht man die aufgedeckten Karten `previewCardsTime`
@@ -75,8 +75,4 @@ const gameState = {
 }
 ```
 
-Ich möchte zwei gleiche indizes eines array von emojis. 
-nicht alle emojis sind verfügbar, mit availableCards bekomme ich ein arrary
-der verfügbaren indizes. aus diesem array sollen die zwei gleichen emojis bestimmt werden,
-damit ich diese in [first, second] geben kann.
 

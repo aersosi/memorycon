@@ -1,7 +1,7 @@
 "use client"
 
-import Card from "@/components/card";
-import GameEndDialog from "@/components/gameEndDialog";
+import GameCard from "@/components/pageGame/gameCard";
+import GameEndDialog from "@/components/pageGame/gameEndDialog";
 import GameHeader from "@/components/pageGame/gameHeader";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { useComputerTurn } from "@/hooks/useComputerTurn";
@@ -56,7 +56,7 @@ export default function GamePage() {
             <GameHeader/>
             <main className="grid grid-cols-6 grid-rows-6 gap-4 grow w-full">
                 {cardEmojis.map((emoji, i) => (
-                    <Card
+                    <GameCard
                         key={i}
                         emoji={emoji}
                         isFound={gameState.foundMatches.includes(emoji)}
