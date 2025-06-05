@@ -52,10 +52,8 @@
     --color-holi-400: hsl(121, 81.3%, 58.3%);
     --color-holi-500: hsl(133, 72%, 46.5%);
     --color-holi-600: hsl(144, 62.7%, 34.7%);
-
     --color-holi-700: hsl(156, 53.3%, 22.8%);
     --color-holi-800: hsl(168, 44%, 11%); /* holisticon dark #102924 */
-
     --color-holi-900: hsl(180, 34.7%, 8%);
     --color-holi-950: hsl(192, 25.3%, 5%);
 }

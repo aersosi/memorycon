@@ -8,13 +8,16 @@ import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
 import { useHandleCardMatch } from "@/hooks/useHandleCardMatch";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
-import { useCallback, useState } from "react";
+import { gameConfig } from "@/lib/config";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 export default function GamePage() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
     const flippedCardIndices = gameState.flippedCardIndices;
+    const config = gameConfig(gameState.gameModeEasy);
+
 
     const [cardEmojis, setCardEmojis] = useState<string[]>([]);
     const [shuffleTrigger, setShuffleTrigger] = useState(0);
@@ -50,8 +53,11 @@ export default function GamePage() {
     useComputerTurn(handleCardFlip, cardEmojis, flippedCardIndices);
     useGameEnd(handleGameEnd);
 
-    return (
+    useEffect(() => {
+        document.title = config.description;
+    }, []);
 
+    return (
         <div className={`${hidePage} h-full transition-opacity duration-250 flex flex-col items-center justify-center gap-8 w-full max-w-[1024px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12`}>
             <GameHeader/>
             <main className="grid grid-cols-6 grid-rows-6 gap-4 grow w-full">

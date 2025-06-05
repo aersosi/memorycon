@@ -1,6 +1,7 @@
 import StartInput from "@/components/pageStart/startInput";
 import { Button } from "@/components/ui/button";
 import { useGameDispatch } from "@/contexts/gameContext";
+import { useEffect } from "react";
 
 export default function StartPage() {
     const dispatch = useGameDispatch();
@@ -14,6 +15,10 @@ export default function StartPage() {
         dispatch({type: 'SET_GAME_EASY', payload: false})
         dispatch({type: 'SHOW_GAME', payload: true})
     }
+
+    useEffect(() => {
+        document.title = 'memorycon';
+    }, []);
 
     return (
         <div className="flex flex-col items-center justify-center gap-14 w-full max-w-[720px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12">
