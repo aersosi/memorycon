@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
+    --color-background: var(--color-holi-900);
+    --color-foreground: var(--color-holi-50);
 
     --font-sans: var(--font-geist-sans);
     --font-mono: var(--font-geist-mono);
@@ -44,34 +44,37 @@
     --radius-xl: calc(var(--radius) + 4px);
 }
 
-
 @theme {
     --color-holi-50: hsl(73, 100%, 96%);
     --color-holi-100: hsl(85, 100%, 93.8%);
-    --color-holi-200: hsl(97, 100%, 82%);
+    --color-holi-200: hsl(97, 100%, 82%); /* holisticon light #c8ffa5 */
     --color-holi-300: hsl(109, 90.7%, 70.2%);
     --color-holi-400: hsl(121, 81.3%, 58.3%);
     --color-holi-500: hsl(133, 72%, 46.5%);
     --color-holi-600: hsl(144, 62.7%, 34.7%);
     --color-holi-700: hsl(156, 53.3%, 22.8%);
-    --color-holi-800: hsl(168, 44%, 11%);
+    --color-holi-800: hsl(168, 44%, 11%); /* holisticon dark #102924 */
     --color-holi-900: hsl(180, 34.7%, 8%);
     --color-holi-950: hsl(192, 25.3%, 5%);
 }
 
 @theme {
-    --color-holi-50: hsl(73, 100%, 96%);
-    --color-holi-100: hsl(85, 100%, 93.8%);
-    --color-holi-200: hsl(97, 100%, 82%); /* light #c8ffa5 */
-    --color-holi-300: hsl(109, 90.7%, 70.2%);
-    --color-holi-400: hsl(121, 81.3%, 58.3%);
-    --color-holi-500: hsl(133, 72%, 46.5%);
-    --color-holi-600: hsl(144, 62.7%, 34.7%);
-    --color-holi-700: hsl(156, 53.3%, 22.8%);
-    --color-holi-800: hsl(168, 44%, 11%); /* dark #102924 */
-    --color-holi-900: hsl(180, 34.7%, 8%);
-    --color-holi-950: hsl(192, 25.3%, 5%);
+    /* 400px – 768px = 44px → 72px */
+    --text-h1-clamp: clamp(2.75rem, 0.8478rem + 7.6087vw, 4.5rem);
+    /* 400px – 768px = 28px → 44px */
+    --text-h2-clamp: clamp(1.75rem, 0.663rem + 4.3478vw, 2.75rem);
 }
+
+
+:root {
+    /* 400px – 768px = 16px → 64px */
+    --16-64: clamp(1rem, -2.2609rem + 13.0435vw, 4rem);
+
+    --color-holi-750: hsl(162, 49%, 15.4%);
+    --selection-color: hsla(97, 100%, 82%, 1);
+    --selection-bg-color: hsla(162, 49%, 15.4%, 0.75);
+}
+
 
 :root {
     --primary: var(--color-holi-200);
@@ -81,8 +84,9 @@
 
     --muted: oklch(0.97 0 0);
     --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+
+    --accent: var(--color-holi-200);
+    --accent-foreground: var(--color-holi-700);
     --destructive: oklch(0.577 0.245 27.325);
 }
 
@@ -101,20 +105,23 @@
 
 :root {
     --radius: 0.625rem;
-    --background: var(--color-holi-950);
+    --background: var(--color-holi-900);
     --foreground: white;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+
+    --border: var(--color-holi-200);
+    --input: var(--color-holi-200);
+    --ring: var(--color-holi-200);
+
     --chart-1: oklch(0.646 0.222 41.116);
     --chart-2: oklch(0.6 0.118 184.704);
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
+
     --sidebar: oklch(0.985 0 0);
     --sidebar-foreground: oklch(0.145 0 0);
     --sidebar-primary: oklch(0.205 0 0);

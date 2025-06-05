@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 
-export function useGameEnd(setOpen: (v: boolean) => void) {
-    const { allCards, foundMatches } = useGameState();
+export function useGameEnd(handleGameEnd: (isOpen: boolean) => void) {
+    const gameState = useGameState();
+    const { allCards, foundMatches } = gameState;
     const dispatch = useGameDispatch();
 
     useEffect(() => {
-        if (foundMatches.length === allCards.length) {
+        const allCardsFlipped = foundMatches.length === allCards.length;
+        if (!gameState.isGameEnd && allCardsFlipped) {
             dispatch({ type: "GAME_END" });
-            setOpen(true);
+            handleGameEnd(true);
         }
-    }, [foundMatches, allCards.length, dispatch, setOpen]);
+    }, [foundMatches, allCards.length, gameState.isGameEnd, dispatch, handleGameEnd]);
 }

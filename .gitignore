@@ -24,7 +24,7 @@
 .DS_Store
 .idea
 *.pem
-__hidden
+__hidden*
 
 # debug
 npm-debug.log*

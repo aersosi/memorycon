@@ -18,17 +18,11 @@ export const metadata: Metadata = {
     description: "Created by Arthur Ersosi",
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-        <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased bg-dots`}
-        >
-
+        <body className={`${geistSans.variable} ${geistMono.variable} 
+            antialiased bg-dots flex flex-col items-center justify-center p-4`}>
         {children}
         </body>
         </html>

@@ -4,38 +4,37 @@ import { useEffect } from "react";
 export function useHandleCardMatch(
     flippedCardIndices: number[],
     cardEmojis: string[],
-    resetFlipped: () => void
 ) {
     const dispatch = useGameDispatch();
-    const { playersRound } = useGameState(); // Nur benötigte Werte extrahieren
+    const gameState = useGameState();
 
     useEffect(() => {
-        if (flippedCardIndices.length !== 2) return;
+        if (gameState.isGameEnd || flippedCardIndices.length !== 2) return;
 
         const [i1, i2] = flippedCardIndices;
         const [e1, e2] = [cardEmojis[i1], cardEmojis[i2]];
 
         if (e1 === e2) {
-            dispatch({ type: "PUSH_FOUND_MATCHES", payload: [e1, e2] });
+            dispatch({type: "SET_FOUND_MATCHES", payload: [e1, e2]});
             dispatch({
-                type: playersRound.isRoundHuman
+                type: gameState.isRoundHuman
                     ? "INCREMENT_HUMAN_POINTS"
                     : "INCREMENT_COMPUTER_POINTS",
                 payload: 1,
             });
         }
 
-        const timeout = setTimeout(() => {
-            resetFlipped();
-            dispatch({ type: "NEXT_ROUND" });
+        const waitBeforeNextRound = setTimeout(() => {
+            dispatch({type: "RESET_FLIPPED"});
+            dispatch({type: "NEXT_ROUND"});
         }, 1000);
 
-        return () => clearTimeout(timeout);
+        return () => clearTimeout(waitBeforeNextRound);
     }, [
         flippedCardIndices,
         cardEmojis,
         dispatch,
-        playersRound.isRoundHuman,
-        resetFlipped
+        gameState.isRoundHuman,
+        gameState.isGameEnd
     ]);
 }

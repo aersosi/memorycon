@@ -2,11 +2,12 @@
   position: relative;
 
   &:after {
+    --size: 0.75rem;
     position: absolute;
     content: "";
-    background-image: radial-gradient(#ffffff1c 8%, #0000 8%);
-    background-size: 24px 24px;
-    inset: 1rem;
+    background-image: radial-gradient(var(--color-holi-750) 10%, rgba(0,0,0,0) 10%);
+    background-size: var(--size) var(--size);
+    inset: 0.5rem;
     z-index: -1;
   }
 }

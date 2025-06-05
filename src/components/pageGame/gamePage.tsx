@@ -1,21 +1,25 @@
 "use client"
 
-import Card from "@/components/card";
-import GameEndDialog from "@/components/gameEndDialog";
-import GameHeader from "@/components/gamePage/gameHeader";
+import GameCard from "@/components/pageGame/gameCard";
+import GameEndDialog from "@/components/pageGame/gameEndDialog";
+import GameHeader from "@/components/pageGame/gameHeader";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
 import { useComputerTurn } from "@/hooks/useComputerTurn";
 import { useGameEnd } from "@/hooks/useGameEnd";
 import { useHandleCardMatch } from "@/hooks/useHandleCardMatch";
 import { useInitializeGame } from "@/hooks/useInitializeGame";
-import { useCallback, useState } from "react";
-import { Button } from "../ui/button";
+import { gameConfig } from "@/lib/config";
+import { useCallback, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export default function GamePage() {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
+    const flippedCardIndices = gameState.flippedCardIndices;
+    const config = gameConfig(gameState.gameModeEasy);
+
+
     const [cardEmojis, setCardEmojis] = useState<string[]>([]);
-    const [flippedCardIndices, setFlippedCardIndices] = useState<number[]>([]);
     const [shuffleTrigger, setShuffleTrigger] = useState(0);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [pageHidden, setPageHidden] = useState(false);
@@ -27,39 +31,38 @@ export default function GamePage() {
             flippedCardIndices.length >= 2
         ) return;
 
-        setFlippedCardIndices(prev => [...prev, index]);
-    }, [
-        gameState.previewCards,
-        gameState.foundMatches,
-        flippedCardIndices,
-        cardEmojis
-    ]);
+        dispatch({type: "FLIP_CARD", payload: index});
+    }, [dispatch, flippedCardIndices, gameState.previewCards, gameState.foundMatches, cardEmojis]);
 
     const handleRestartGame = () => {
         setDialogOpen(false);
         setPageHidden(true);
-        setTimeout(() => {
-            dispatch({type: "RESET_GAME"});
-            setShuffleTrigger(prev => prev + 1);
-        }, 1000);
+
+        dispatch({type: "RESET_GAME"});
+        setShuffleTrigger(prev => prev + 1); // trigger Emoji reshuffle
     };
 
+    const handleGameEnd = (setOpen: boolean) => {
+        setDialogOpen(setOpen)
+    }
+
     const hidePage = pageHidden && "opacity-0"
-    const resetFlipped = useCallback(() => {
-        setFlippedCardIndices([]);
-    }, []);
 
     useInitializeGame(shuffleTrigger, setCardEmojis);
-    useHandleCardMatch(flippedCardIndices, cardEmojis, resetFlipped);
+    useHandleCardMatch(flippedCardIndices, cardEmojis);
     useComputerTurn(handleCardFlip, cardEmojis, flippedCardIndices);
-    useGameEnd(setDialogOpen);
+    useGameEnd(handleGameEnd);
+
+    useEffect(() => {
+        document.title = config.description;
+    }, []);
 
     return (
-        <div className={`${hidePage} transition-opacity duration-250 h-full flex flex-col gap-4 p-12`}>
+        <div className={`${hidePage} h-full transition-opacity duration-250 flex flex-col items-center justify-center gap-8 w-full max-w-[1024px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12`}>
             <GameHeader/>
-            <main className="grow grid grid-cols-6 grid-rows-6 gap-4">
+            <main className="grid grid-cols-6 grid-rows-6 gap-4 grow w-full">
                 {cardEmojis.map((emoji, i) => (
-                    <Card
+                    <GameCard
                         key={i}
                         emoji={emoji}
                         isFound={gameState.foundMatches.includes(emoji)}
@@ -70,7 +73,7 @@ export default function GamePage() {
                 ))}
             </main>
             <footer className="flex">
-                <Button onClick={handleRestartGame} variant="outline" className="w-1/2 mx-auto">
+                <Button onClick={handleRestartGame} variant="outline">
                     Zum Anfang
                 </Button>
             </footer>

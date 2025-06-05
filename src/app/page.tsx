@@ -1,7 +1,7 @@
 "use client"
 
-import GamePage from "@/components/gamePage/gamePage";
-import StartPage from "@/components/startPage/startPage";
+import GamePage from "@/components/pageGame/gamePage";
+import StartPage from "@/components/pageStart/startPage";
 import { GameProvider, useGameState } from "@/contexts/gameContext"
 
 export default function Home() {
@@ -13,8 +13,7 @@ export default function Home() {
 }
 
 function GamePages() {
-    const gameState = useGameState();
-    const {showGame} = gameState.gameMode;
+    const {showGame} = useGameState();
 
     return (
         <>

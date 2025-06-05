@@ -1,27 +1,21 @@
 import { useRoundStyles } from "@/hooks/useStyles";
 import { useGameDispatch, useGameState } from "@/contexts/gameContext";
+import { gameConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import { CardProps, CardSideProps } from "@/types/props";
 import { useEffect } from "react";
 
-export type CardProps = {
-    emoji: string,
-    isFlipped: boolean,
-    isFound: boolean,
-    isPreview: boolean,
-    onFlip: () => void,
-};
-
-export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
+export default function GameCard({emoji, isFlipped, isFound, isPreview, onFlip}: CardProps) {
     const gameState = useGameState();
     const dispatch = useGameDispatch();
+    const config = gameConfig(gameState.gameModeEasy);
+
     const { bgColorRound } = useRoundStyles();
 
     // Handle preview mode timing
     useEffect(() => {
         if (isPreview) {
-            const previewTime = gameState.gameMode.isEasy
-                ? gameState.gameMode.gameEasy.previewCardsTime
-                : gameState.gameMode.gameHard.previewCardsTime;
+            const previewTime = config.previewTime;
 
             const timer = setTimeout(() => {
                 dispatch({type: 'END_PREVIEW'});
@@ -29,7 +23,7 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
 
             return () => clearTimeout(timer);
         }
-    }, [isPreview, gameState.gameMode, dispatch]);
+    }, [isPreview, gameState.gameModeEasy, dispatch, config.previewTime]);
 
     const isEmojiVisible = isPreview || isFlipped || isFound;
 
@@ -45,7 +39,7 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
                 ${isPreview && "pointer-events-none"}
                 ${isFound && "pointer-events-none opacity-10"}
                 ${isFound && "pointer-events-none"}
-                ${!gameState.playersRound.isRoundHuman && "pointer-events-none"}
+                ${!gameState.isRoundHuman && "pointer-events-none"}
             `)}
             onClick={handleClick}
         >
@@ -62,14 +56,9 @@ export default function Card({emoji, isFlipped, isFound, isPreview, onFlip}: Car
     );
 }
 
-type CardSideProps = {
-    className?: string;
-    children?: React.ReactNode;
-};
-
 export function CardSide({className = "", children}: CardSideProps) {
     return (
-        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-4xl 
+        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-2xl md:text-4xl 
                 transition-all duration-500 backface-hidden [transform-style:preserve-3d] ${className}`}
         >
             {children}

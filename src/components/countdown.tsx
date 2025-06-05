@@ -1,31 +1,13 @@
-import { useEffect, useState, useRef } from "react";
+import { useGameState } from "@/contexts/gameContext";
+import { useCountdown } from "@/hooks/useCountdown";
+import { CountdownProps } from "@/types/props";
 
-type CountdownProps = {
-    initialTime: number;
-    onTimeOver?: () => void;
-    stopOn?: boolean;
-};
+export default function Countdown({ initialTime, onTimeOver }: CountdownProps) {
+    const gameState = useGameState();
+    const timeLeft = useCountdown(initialTime, onTimeOver);
 
-export default function Countdown({ initialTime = 60, onTimeOver, stopOn = true }: CountdownProps) {
-    const [timeLeft, setTimeLeft] = useState(initialTime);
-    const prevTimeLeftRef = useRef(timeLeft);
-
-    useEffect(() => {
-        if (stopOn || timeLeft === 0) return;
-
-        const timer = setInterval(() => {
-            setTimeLeft(prev => prev - 1);
-        }, 1000);
-
-        return () => clearInterval(timer);
-    }, [stopOn, timeLeft]);
-
-    useEffect(() => {
-        if (prevTimeLeftRef.current > 0 && timeLeft === 0 && onTimeOver) {
-            onTimeOver();
-        }
-        prevTimeLeftRef.current = timeLeft;
-    }, [timeLeft, onTimeOver]);
+    // Stop countdown if game ends
+    if (gameState.isGameEnd) return <>{initialTime}</>;
 
     return <>{timeLeft}</>;
 }
