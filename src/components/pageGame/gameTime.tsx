@@ -27,8 +27,8 @@ export default function GameTime() {
 
     return (
         <p className="flex gap-1">
-            <span className={cn(`${textColorRound}`)}>{label}: </span>
-            <span className="w-7 text-center font-semibold">
+            <span className={cn(`${textColorRound} hidden sm:inline`)}>{label}: </span>
+            <span className="sm:w-7 text-center font-bold">
                 <Countdown
                     key={`${previewCards}-${isRoundHuman}`}
                     initialTime={timeLimit}

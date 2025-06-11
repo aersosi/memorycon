@@ -22,7 +22,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
     return (
         <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} 
-            antialiased bg-dots flex flex-col items-center justify-center p-4`}>
+            antialiased bg-dots flex flex-col items-center justify-center p-2`}>
         {children}
         </body>
         </html>
