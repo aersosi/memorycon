@@ -21,10 +21,10 @@ export default function StartPage() {
     }, []);
 
     return (
-        <div className="flex flex-col items-center justify-center gap-14 w-full max-w-[720px] border bg-background/60 rounded-xl px-[var(--16-64)] py-12">
+        <div className="flex flex-col items-center justify-between gap-6 sm:gap-12 h-full sm:h-auto w-full max-w-[720px] border bg-background/60 rounded-xl p-[var(--16-64)] sm:py-12">
             <header className="flex flex-col justify-between items-center w-full">
-                <h2 className="text-h2-clamp ">Wilkommen zu</h2>
-                <h1 className="text-h1-clamp leading-8 font-semibold">memorycon</h1>
+                <h2 className="text-h2-font-size-fluid ">Willkommen zu</h2>
+                <h1 className="text-h1-font-size-fluid leading-h1-fluid le ading-8 font-semibold">memorycon</h1>
             </header>
 
             <div className="grid gap-3 w-full">
@@ -35,7 +35,7 @@ export default function StartPage() {
                 Wählen Sie einen Schwierigkeitsgrad, um das Spiel zu beginnen. <br/>
                 Welcher Spieler beginnt, wird zufällig bestimmt.
             </p>
-            <div className="flex flex-col gap-6 w-full">
+            <div className="flex flex-col gap-4 w-full pb-4">
                 <Button onClick={goEasy} className="grow" variant="outline">
                     Easy Peasy
                 </Button>

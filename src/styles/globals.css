@@ -60,9 +60,13 @@
 
 @theme {
     /* 400px – 768px = 44px → 72px */
-    --text-h1-clamp: clamp(2.75rem, 0.8478rem + 7.6087vw, 4.5rem);
+    --text-h1-font-size-fluid: clamp(2.75rem, 0.8478rem + 7.6087vw, 4.5rem);
     /* 400px – 768px = 28px → 44px */
-    --text-h2-clamp: clamp(1.75rem, 0.663rem + 4.3478vw, 2.75rem);
+    --text-h2-font-size-fluid: clamp(1.75rem, 0.663rem + 4.3478vw, 2.75rem);
+
+    /* 400px – 768px = 16px → 32px */
+    --leading-h1-fluid: clamp(1rem, -0.087rem + 4.3478vw, 2rem);
+    /*--leading-h1-fluid: clamp(0.0625, -0.0054 + 0.2717vw, 0.125);*/
 }
 
 

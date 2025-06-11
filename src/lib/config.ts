@@ -20,7 +20,7 @@ export type GameState = {
 export const gameConfig = (gameModeEasy: boolean) => ({
     previewTime: gameModeEasy ? 10 : 5,
     turnTime: gameModeEasy ? 10 : 5,
-    title: gameModeEasy ? "Easy Peasy" : "Go Hard",
+    title: gameModeEasy ? "Easy" : "Hard",
     description: gameModeEasy ? "memorycon | easy game" : "memorycon | hard game",
 });
 
