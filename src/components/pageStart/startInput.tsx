@@ -13,10 +13,10 @@ export default function StartInput() {
     const handleKeyDown = useCallback(
         (e: KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter" || e.key === "Tab") {
-                const nameValue = inputValue.trim() ? inputValue.trim() : "human";
+                const nameValue = inputValue.trim() ? inputValue.trim() : "Human";
                 dispatch({type: "SET_HUMAN_NAME", payload: nameValue});
             } else if (e.key === "Escape") {
-                setInputValue("human");
+                setInputValue("Human");
                 inputRef.current?.blur();
             }
         }, [inputValue, dispatch]
@@ -26,7 +26,7 @@ export default function StartInput() {
         (e: ChangeEvent<HTMLInputElement>) => {
             const newValue = e.target.value;
             setInputValue(newValue);
-            const nameValue = newValue.trim() ? newValue.trim() : "human";
+            const nameValue = newValue.trim() ? newValue.trim() : "Human";
             dispatch({type: "SET_HUMAN_NAME", payload: nameValue});
         }, [dispatch]
     );
