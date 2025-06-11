@@ -55,7 +55,7 @@ export default function GamePage() {
 
     useEffect(() => {
         document.title = config.description;
-    }, []);
+    },[config.description]);
 
     return (
         <div className={`${hidePage} transition-opacity duration-250 flex flex-col items-center justify-between gap-6 lg:gap-12 h-full w-full max-w-[1024px] border bg-background/60 rounded-xl p-[var(--16-64)] sm:py-12`}>
@@ -77,7 +77,6 @@ export default function GamePage() {
                     Zum Anfang
                 </Button>
             </footer>
-
             <GameEndDialog isOpen={dialogOpen} onButton={handleRestartGame}/>
         </div>
     );
