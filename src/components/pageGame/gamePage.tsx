@@ -77,7 +77,6 @@ export default function GamePage() {
                     Zum Anfang
                 </Button>
             </footer>
-
             <GameEndDialog isOpen={dialogOpen} onButton={handleRestartGame}/>
         </div>
     );
