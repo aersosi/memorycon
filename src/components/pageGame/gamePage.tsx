@@ -58,7 +58,7 @@ export default function GamePage() {
     },[config.description]);
 
     return (
-        <div className={`${hidePage} transition-opacity duration-250 flex flex-col items-center justify-between gap-6 lg:gap-12 h-full w-full max-w-[1024px] border bg-background/60 rounded-xl p-[var(--16-64)] sm:py-12`}>
+        <div className={`${hidePage} transition-opacity duration-250 flex flex-col items-center justify-between gap-6 lg:gap-12 h-full 2xl:h-3/4 w-full max-w-[1024px] border bg-background/60 rounded-xl p-[var(--clamp-xs-md-16-64)] sm:py-12`}>
             <GameHeader/>
             <main className="grid grid-cols-6 grid-rows-6 gap-2 md:gap-4 grow w-full">
                 {cardEmojis.map((emoji, i) => (

@@ -44,42 +44,6 @@
     --radius-xl: calc(var(--radius) + 4px);
 }
 
-@theme {
-    --color-holi-50: hsl(73, 100%, 96%);
-    --color-holi-100: hsl(85, 100%, 93.8%);
-    --color-holi-200: hsl(97, 100%, 82%); /* holisticon light #c8ffa5 */
-    --color-holi-300: hsl(109, 90.7%, 70.2%);
-    --color-holi-400: hsl(121, 81.3%, 58.3%);
-    --color-holi-500: hsl(133, 72%, 46.5%);
-    --color-holi-600: hsl(144, 62.7%, 34.7%);
-    --color-holi-700: hsl(156, 53.3%, 22.8%);
-    --color-holi-800: hsl(168, 44%, 11%); /* holisticon dark #102924 */
-    --color-holi-900: hsl(180, 34.7%, 8%);
-    --color-holi-950: hsl(192, 25.3%, 5%);
-}
-
-@theme {
-    /* 400px – 768px = 44px → 72px */
-    --text-h1-font-size-fluid: clamp(2.75rem, 0.8478rem + 7.6087vw, 4.5rem);
-    /* 400px – 768px = 28px → 44px */
-    --text-h2-font-size-fluid: clamp(1.75rem, 0.663rem + 4.3478vw, 2.75rem);
-
-    /* 400px – 768px = 16px → 32px */
-    --leading-h1-fluid: clamp(1rem, -0.087rem + 4.3478vw, 2rem);
-    /*--leading-h1-fluid: clamp(0.0625, -0.0054 + 0.2717vw, 0.125);*/
-}
-
-
-:root {
-    /* 400px – 768px = 16px → 64px */
-    --16-64: clamp(1rem, -2.2609rem + 13.0435vw, 4rem);
-
-    --color-holi-750: hsl(162, 49%, 15.4%);
-    --selection-color: hsla(97, 100%, 82%, 1);
-    --selection-bg-color: hsla(162, 49%, 15.4%, 0.75);
-}
-
-
 :root {
     --primary: var(--color-holi-200);
     --primary-foreground: var(--color-holi-800);
@@ -172,3 +136,59 @@
     }
 }
 
+
+/* Custom Styles Below*/
+
+@theme {
+    /* Custom Colors Config */
+    --color-holi-50: hsl(73, 100%, 96%);
+    --color-holi-100: hsl(85, 100%, 93.8%);
+    --color-holi-200: hsl(97, 100%, 82%); /* holisticon light #c8ffa5 */
+    --color-holi-300: hsl(109, 90.7%, 70.2%);
+    --color-holi-400: hsl(121, 81.3%, 58.3%);
+    --color-holi-500: hsl(133, 72%, 46.5%);
+    --color-holi-600: hsl(144, 62.7%, 34.7%);
+    --color-holi-700: hsl(156, 53.3%, 22.8%);
+    --color-holi-800: hsl(168, 44%, 11%); /* holisticon dark #102924 */
+    --color-holi-900: hsl(180, 34.7%, 8%);
+    --color-holi-950: hsl(192, 25.3%, 5%);
+}
+
+/*
+    Tailwind Breakpoints
+    2xs: 24rem = 384px -> my custom breakpoint
+    xs: 32rem = 512px -> my custom breakpoint
+    sm: 40rem = 640px
+    md: 48rem = 768px
+    lg: 64rem = 1024px
+    xl: 80rem = 1280px
+    2xl: 96rem = 1536px
+*/
+
+:root {
+    /* xs-md = 512px –> 768px */
+    --clamp-xs-md-16-64: clamp(1rem, -5rem + 18.75vw, 4rem); /* 16px → 64px */
+    --clamp-xs-md-24-64: clamp(1.5rem, -3.5rem + 15.625vw, 4rem); /* 24px → 64px */
+    --clamp-xs-md-32-64: clamp(2rem, -2rem + 12.5vw, 4rem); /*  32px → 64px */
+    --clamp-xs-md-44-72: clamp(2.75rem, -0.75rem + 10.9375vw, 4.5rem); /* 44px → 72px */
+    --clamp-xs-md-28-44: clamp(1.75rem, 0.663rem + 4.3478vw, 2.75rem); /* 28px → 44px */
+
+    /* color step 750 is not included in tw Api so not definable in @theme */
+    --color-holi-750: hsl(162, 49%, 15.4%);
+
+    /* Custom Text-Select Colors */
+    --selection-color: hsla(97, 100%, 82%, 1);
+    --selection-bg-color: hsla(162, 49%, 15.4%, 0.75);
+}
+
+@theme {
+    /* Custom Sizes Config */
+    --breakpoint-2xs: 24rem;
+    --breakpoint-xs: 32rem;
+
+    --text-h1-font-size-fluid: var(--clamp-xs-md-44-72);
+    --leading-h1-fluid: var(--clamp-xs-md-44-72);
+
+    --text-h2-font-size-fluid: var(--clamp-xs-md-28-44);
+    --leading-h2-fluid: var(--clamp-xs-md-28-44);
+}
