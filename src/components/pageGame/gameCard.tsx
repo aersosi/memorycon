@@ -58,7 +58,7 @@ export default function GameCard({emoji, isFlipped, isFound, isPreview, onFlip}:
 
 export function CardSide({className = "", children}: CardSideProps) {
     return (
-        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-2xl md:text-4xl 
+        <div className={`rounded-md absolute inset-0 flex justify-center items-center text-h2-font-size-fluid leading-h2-fluid
                 transition-all duration-500 backface-hidden [transform-style:preserve-3d] ${className}`}
         >
             {children}

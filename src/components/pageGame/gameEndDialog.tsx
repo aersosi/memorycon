@@ -14,18 +14,18 @@ export default function GameEndDialog({isOpen, onButton,}: GameEndDialogProps) {
         <Dialog open={isOpen} onOpenChange={onButton}>
             <DialogContent hideClose>
                 <DialogHeader>
-                    <DialogTitle className="text-3xl text-center text-accent">{title}</DialogTitle>
+                    <DialogTitle className="text-3xl text-center">{title}</DialogTitle>
                 </DialogHeader>
 
-                <div className="flex justify-center gap-4 text-xl py-2">
-                    <p>Deine Punkte: {humanPoints}</p>
-                    <p>Computer Punkte: {computerPoints}</p>
+                <div className="flex flex-col items-center gap-1 text-xl py-2 flex-wrap">
+                    <p><span className="text-primary">Deine Punkte: </span>{humanPoints}</p>
+                    <p><span className="text-amber-200">Computer Punkte: </span>{computerPoints}</p>
                 </div>
                 <p className="text-7xl py-6 text-center">
                     {bodyCopy}
                 </p>
                 <DialogFooter>
-                    <DialogClose asChild className="w-1/2 mx-auto">
+                    <DialogClose asChild className="mx-auto">
                         <Button type="button" variant="outline">
                             Nochmal Spielen!
                         </Button>

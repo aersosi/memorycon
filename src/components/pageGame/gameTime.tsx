@@ -27,15 +27,15 @@ export default function GameTime() {
 
     return (
         <p className="flex gap-1">
-            <span className={cn(`${textColorRound} hidden sm:inline`)}>{label}: </span>
-            <span className="sm:w-7 text-center font-bold">
+            <span className={cn(`${textColorRound}`)}>{label}: </span>
+            <span className="sm:w-7 text-center font-semibold">
                 <Countdown
                     key={`${previewCards}-${isRoundHuman}`}
                     initialTime={timeLimit}
                     onTimeOver={handleTimeOver}
                 />
             </span>
-            <span className={cn(`${textColorRound}`)}> Sek.</span>
+            <span className="font-bold"> Sek.</span>
         </p>
     );
 }

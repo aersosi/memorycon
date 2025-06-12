@@ -15,21 +15,21 @@ export default function GameHeader() {
     const gameModeText = config.title;
 
     return (
-        <header className="flex flex-col gap justify-between text-xl w-full">
-            <div className="flex gap-x-4 justify-between items-end flex-wrap">
-                <h1 className="hidden sm:block text-h2-font-size-fluid font-semibold">memorycon</h1>
-                <h1 className="flex gap-4 justify-between w-full sm:hidden text-h2-font-size-fluid font-semibold">
+        <header className="flex flex-col gap-4 justify-between text-xl w-full">
+            <div className="flex gap-4 justify-between items-end flex-wrap">
+                <h2 className="hidden sm:block text-h2-font-size-fluid leading-h2-fluid font-semibold">memorycon</h2>
+                <h2 className="flex gap-4 justify-between w-full sm:hidden text-h2-font-size-fluid leading-h2-fluid font-semibold">
                     <span>memorycon</span>
-                    <span className="font-normal opacity-50">{gameModeText}</span>
-                </h1>
-                <p className={`w-full sm:w-fit text-h2-font-size-fluid ${textColorRound}`}>{playerNameText} ist dran</p>
+                    <span>{gameModeText}</span>
+                </h2>
+                <p className={`w-full sm:w-fit text-h2-font-size-fluid leading-h2-fluid  ${textColorRound}`}>{playerNameText} ist dran</p>
             </div>
-            <div className="flex gap-x-4 justify-between w-full flex-wrap">
+            <div className="flex gap-4 justify-between w-full flex-wrap">
                 <p className="hidden sm:inline">
                     <span className={cn(`${textColorRound}`)}>Modus: </span>
                     <span className="font-semibold">{gameModeText}</span>
                 </p>
-                <div className="flex gap-6">
+                <div className="flex gap-6 justify-between w-full xs:w-fit">
                     <p>
                         <span className={cn(`${textColorRound}`)}>{humanName}: </span>
                         <span className="font-semibold">{humanPoints}</span>
