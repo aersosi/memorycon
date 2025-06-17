@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "./custom/base.css";
+@import "./custom/bg.css";
+@import "./custom/selection.css";
+@import "./custom/scrollbar.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
