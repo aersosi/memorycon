@@ -1,5 +1,4 @@
-// __tests__/gamePage.test.tsx
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import GamePage from '@/components/pageGame/gamePage';
 import { GameProvider } from '@/contexts/gameContext';
 import * as useHooks from '@/hooks/useInitializeGame';
@@ -43,7 +42,6 @@ describe('GamePage Component', () => {
         });
     });
 
-
     it('renders the game header, game cards, and button', async () => {
         render(
             <GameProvider>
@@ -51,9 +49,11 @@ describe('GamePage Component', () => {
             </GameProvider>
         );
 
-        expect(screen.getByTestId('game-header')).toBeInTheDocument();
-        expect(screen.getAllByTestId('game-card')).toHaveLength(2);
-        expect(screen.getByRole('button', { name: /zum anfang/i })).toBeInTheDocument();
+        await waitFor(() => {
+            expect(screen.getByTestId('game-header')).toBeInTheDocument();
+            expect(screen.getAllByTestId('game-card')).toHaveLength(2);
+            expect(screen.getByRole('button', { name: /zum anfang/i })).toBeInTheDocument();
+        });
     });
 
     it('clicking "Zum Anfang" resets game and reshuffles', async () => {
@@ -63,8 +63,15 @@ describe('GamePage Component', () => {
             </GameProvider>
         );
 
+        await waitFor(() => {
+            expect(screen.getByRole('button', { name: /zum anfang/i })).toBeInTheDocument();
+        });
+
         const restartButton = screen.getByRole('button', { name: /zum anfang/i });
-        fireEvent.click(restartButton);
+
+        await act(async () => {
+            fireEvent.click(restartButton);
+        });
 
         await waitFor(() => {
             expect(screen.getAllByTestId('game-card')).toHaveLength(2);
@@ -78,8 +85,15 @@ describe('GamePage Component', () => {
             </GameProvider>
         );
 
+        await waitFor(() => {
+            expect(screen.getAllByTestId('game-card')).toHaveLength(2);
+        });
+
         const cards = screen.getAllByTestId('game-card');
-        fireEvent.click(cards[0]);
+
+        await act(async () => {
+            fireEvent.click(cards[0]);
+        });
 
         // Expect the emoji text to still be there after flip, indicating re-render
         expect(cards[0]).toHaveTextContent('🐶');
@@ -98,8 +112,16 @@ describe('GamePage Component', () => {
             </GameProvider>
         );
 
+        // Wait for component to be ready
+        await waitFor(() => {
+            expect(screen.getByTestId('game-header')).toBeInTheDocument();
+        });
+
         // Simulate game end
-        setDialogOpenFn(true);
+        await act(async () => {
+            setDialogOpenFn(true);
+        });
+
         expect(await screen.findByTestId('game-end-dialog')).toBeInTheDocument();
     });
 });
